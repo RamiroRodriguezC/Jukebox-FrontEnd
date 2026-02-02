@@ -1,0 +1,62 @@
+.album-detail-container {
+  padding: 40px;
+  background-color: #0f172a; /* Fondo oscuro como tu captura */
+  min-height: 100vh;
+}
+
+.album-header {
+  display: flex;
+  gap: 30px;
+  align-items: flex-end; /* Alinea el texto a la base de la imagen */
+  margin-bottom: 20px;
+}
+
+.header-cover {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border-radius: 4px;
+}
+
+.header-title {
+  color: white !important;
+  font-size: 64px !important;
+  margin: 0 !important;
+  line-height: 1;
+}
+
+.header-artist {
+  color: #6366f1 !important; /* Violeta/Azul para resaltar artista */
+  margin-top: 10px !important;
+}
+
+.header-meta {
+  color: #94a3b8;
+  margin-top: 15px;
+}
+
+.rating-number {
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.track-item {
+  border-bottom: 1px solid #1e293b !important;
+  padding: 12px 0 !important;
+}
+
+.track-number {
+  color: #6366f1;
+  margin-right: 15px;
+  width: 25px;
+  display: inline-block;
+}
+
+.btn-reviews {
+  margin-top: 30px;
+  border-color: #475569 !important;
+  color: #cbd5e1 !important;
+}

@@ -1,5 +1,5 @@
 import { Card, Typography, Tag } from 'antd';
-import genericAlbum from '../assets/genericAlbum.png';
+import genericAlbum from '../../assets/genericAlbum.png';
 const { Text } = Typography;
 
 const TrackCard = ({ cancion }) => {
@@ -9,18 +9,21 @@ const TrackCard = ({ cancion }) => {
   return (
     <Card
       hoverable
-      style={{ width: '100%', backgroundColor: '#1e293b', border: 'none' }}
+      className="card-base"
       cover={<img src={cancion.album.url_portada || genericAlbum } alt="Portada" style={{ height: 180, objectFit: 'cover' }} />}
     >
-      <Text strong style={{ color: '#f8fafc', display: 'block' }}>{cancion.titulo}</Text>
-      <Text style={{ color: '#38bdf8', display: 'block' }}>{cancion.autores[0].nombre}</Text>
+      <Card.Meta 
+        title={<span className="card-title">{cancion.titulo}</span>} 
+        description={<span className="card-subtitle">{cancion.autores.map(a => a.nombre).join(', ')}</span>} 
+      />
       
       <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Tag color="cyan">Canción</Tag>
+        <Tag className="card-tag">Canción</Tag>
         <Text style={{ color: '#94a3b8', fontSize: '12px' }}>{formatTime(cancion.duracion)}</Text>
       </div>
     </Card>
   );
 };
+
 
 export default TrackCard;

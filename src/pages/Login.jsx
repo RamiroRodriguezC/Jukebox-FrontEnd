@@ -2,25 +2,31 @@ import React from 'react';
 import { loginUser } from '../services/AuthService';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, message, Flex, Form, Input } from 'antd';
-const Login = () => {
+import { useNavigate } from 'react-router-dom';
+
+
+const Login = ({ setUser }) => {
+  const navigate = useNavigate(); // 2. INICIALIZAR LA FUNCIÓN
   const onFinish = async (values) => {
-    try {
-        // "values" contiene lo que el usuario escribió en los inputs
-        const data = await loginUser(values.mail, values.password);
-        
-        // Si sale bien, guardamos el token y el usuario en el navegador
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
-        
-        message.success('¡Bienvenido de vuelta!');
-        
-        // Redirigimos a la home (que crearemos después)
-        navigate('/home'); 
-    } catch (error) {
-        // Si los datos son incorrectos, AntD nos ayuda a mostrar el error
-        (message.error(error.toString() || "Error desconocido"));
+  try {
+    const data = await loginUser(values.mail, values.password);
+    
+    // 1. Guardamos en disco
+    localStorage.setItem('user', JSON.stringify(data.usuario));
+    
+    // 2. Intentamos avisar a la App
+    if (typeof setUser === 'function') {
+        console.log("Enviando usuario al estado global...");
+        setUser(data.usuario); 
+    } else {
+        console.error("ERROR: setUser no es una función. Revisá cómo pasaste la prop en App.js");
     }
-  };
+
+    navigate('/'); 
+  } catch (error) { 
+    message.error('Error al iniciar sesión: ' + error.message);
+  }
+};
   return (
     <Flex justify="center" align="center" style={{ minHeight: '100vh' }}>
       <Form

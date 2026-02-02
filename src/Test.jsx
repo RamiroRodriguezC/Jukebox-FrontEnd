@@ -2,9 +2,9 @@ import Login from './pages/Login';
 import { Row, Col } from 'antd';
 // iMPORTAR Datos de prueba para los álbumes
 import { MOCK_ALBUMS, MOCK_ARTISTAS, MOCK_CANCIONES } from './utils/mockData';
-import AlbumCard from './components/AlbumCard';
-import ArtistCard from './components/ArtistCard';
-import TrackCard from './components/TrackCard';
+import AlbumCard from './components/cards/AlbumCard';
+import ArtistCard from './components/cards/ArtistCard';
+import TrackCard from './components/cards/TrackCard';
 
 function Test() {
   return (
@@ -12,15 +12,15 @@ function Test() {
         {/* Solo renderizamos el Login para verlo y editarlo */}
         <Row gutter={[16, 16]}>
           {MOCK_ALBUMS.map(album => (
-          <Col key={album._id} span={6}>
-            <AlbumCard album={album} />
-          </Col>
+          <Col key={album._id} xs={12} sm={8} md={6} lg={4}>
+  <AlbumCard album={album} />
+</Col>
         ))}
         </Row>
 
         <Row gutter={[16, 16]}>
           {MOCK_ARTISTAS.map(artista => (
-          <Col key={artista._id} span={6}>
+          <Col key={artista._id} xs={12} sm={8} md={6} lg={4}>
             <ArtistCard artista={artista} />
           </Col>
         ))}
@@ -28,7 +28,7 @@ function Test() {
 
         <Row gutter={[16, 16]}>
           {MOCK_CANCIONES.map(cancion => (
-          <Col key={cancion._id} span={6}>
+          <Col key={cancion._id} xs={12} sm={8} md={6} lg={4}>
             <TrackCard cancion={cancion} />
           </Col>
         ))}

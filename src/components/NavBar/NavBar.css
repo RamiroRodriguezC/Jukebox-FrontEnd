@@ -1,0 +1,79 @@
+/* Contenedor principal del Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: #0f172a; /* Asegúrate de que el fondo sea oscuro */
+  height: 64px;
+}
+
+/* Evita que el menú de escritorio aparezca en móvil si falla la lógica de JS */
+@media (max-width: 767px) {
+  .nav-menu {
+    display: none;
+  }
+}
+
+/* El logo y el título "Jukebox" */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 12px;
+}
+
+.nav-logo {
+  height: 40px;
+  width: auto;
+}
+
+.brand-title {
+  color: #6366f1; /* Un color violeta/azul para resaltar */
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* La lista de navegación - AQUÍ ESTABA EL ERROR */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none; /* Quita los puntos de la lista */
+  margin: 0;
+  padding: 0;
+  gap: 20px; /* Espacio entre Albums, Canciones, etc. */
+}
+
+.nav-menu li {
+  display: flex;
+  align-items: center;
+}
+
+.nav-menu a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+  color: white;
+}
+
+/* El input de búsqueda */
+.nav-search-input {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  outline: none;
+}
+
+/* Botón de Login con estilo de botón */
+.login-btn {
+  background-color: #6366f1;
+  color: white !important;
+  padding: 8px 16px;
+  border-radius: 8px;
+}

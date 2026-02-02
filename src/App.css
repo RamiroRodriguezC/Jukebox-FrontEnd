@@ -1,0 +1,10 @@
+.main-content {
+  /* El padding-top debe ser igual o mayor al alto de tu Navbar */
+  padding-top: 80px; 
+  
+  /* Margen a los costados para que 'Test' no toque los bordes en PC */
+  max-width: 1200px;
+  margin: 0 auto; 
+  padding-left: 20px;
+  padding-right: 20px;
+}

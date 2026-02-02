@@ -1,0 +1,65 @@
+/* Estructura base para todas las cartas */
+.card-base {
+  background-color: #1e293b;
+  padding: 15px;
+  border-radius: 8px; /* Esquinas redoneadas */
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-base:hover {
+  background-color: #182741;
+}
+
+/* La imagen - Por defecto cuadrada (para Álbumes y Canciones) */
+.card-image {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Esto asegura que sea un cuadrado perfecto siempre */
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* --- DIFERENCIAS --- */
+
+/* Clase específica para Artistas: Foto redonda */
+.artist-img {
+  border-radius: 50%;
+}
+
+/* Titulo de las cartas  */
+.card-title {
+  font-size: 16px;
+  color: #f8fafc;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Subtitulo de las cartas */
+.card-subtitle {
+    font-weight: 500;
+    color: #38bdf8;
+    display: block;
+}
+
+.card-tag {
+    color: purple;
+    margin-top: 8;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .card-base {
+    padding: 10px;
+  }
+}
+
+/*
+{ color: '#f8fafc', margin: 0, fontSize: '16px' } titulo
+*/
+
+

@@ -3,6 +3,7 @@ export const MOCK_ALBUMS = [
     _id: "1",
     titulo: "Artaud",
     anio: 1973,
+    url_portada: "https://acdn-us.mitiendanube.com/stores/004/088/117/products/153700-5125962f13f621621d17269575572765-480-0.webp",
     isDeleted: false,
     autores: [
       { _id: "a1", nombre: "Pescado Rabioso" }
@@ -43,7 +44,7 @@ export const MOCK_ALBUMS = [
     _id: "4",
     titulo: "Oktubre",
     anio: 1986,
-    url_portada: "https://upload.wikimedia.org/wikipedia/en/b/b9/Oktubre.jpg",
+    url_portada: "https://akamai.sscdn.co/letras/360x360/albuns/6/3/e/4/2183691712605514.jpg",
     isDeleted: false,
     autores: [
       { _id: "a4", nombre: "Patricio Rey y sus Redonditos de Ricota" }
@@ -58,6 +59,7 @@ export const MOCK_ARTISTAS = [
   {
     _id: "a1",
     nombre: "Pescado Rabioso",
+    url_foto: "https://indiehoy.com/wp-content/uploads/2025/10/luis-alberto-spinetta.webp",
     pais: "Argentina",
     descripcion: "Banda de hard rock y blues rock argentina, liderada por Luis Alberto Spinetta.",
     isDeleted: false
@@ -89,6 +91,7 @@ export const MOCK_CANCIONES = [
     isDeleted: false,
     album: {
       _id: "1",
+      url_portada: "https://acdn-us.mitiendanube.com/stores/004/088/117/products/153700-5125962f13f621621d17269575572765-480-0.webp",
       titulo: "Artaud",
     },
     autores: [
