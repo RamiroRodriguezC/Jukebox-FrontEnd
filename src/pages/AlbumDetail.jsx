@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Row, Col, Typography, Divider, Empty } from 'antd';
 import { StarFilled, ClockCircleOutlined } from '@ant-design/icons';
+import { Rate } from 'antd';
 // Asegurate de que la ruta a tu archivo de datos sea correcta
 import { MOCK_ALBUMS } from '../utils/mockData'; 
 import './AlbumDetail.css';
@@ -45,7 +46,10 @@ const AlbumDetalle = () => {
           <Title level={4} style={{ color: 'white' }}>Rating y Estadísticas</Title>
           <div className="rating-box">
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <StarFilled style={{ color: '#facc15', fontSize: '24px' }} />
+              <Rate disabled allowHalf
+                value={album.rating}
+                style={{fontSize: 32 }} // Estrellas rojas y grandes
+              />
               <span className="rating-number">{album.rating}</span>
             </div>
             <Text style={{ color: '#94a3b8' }}>({album.votos} Votos)</Text>
