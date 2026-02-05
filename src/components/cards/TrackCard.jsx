@@ -3,7 +3,7 @@ import genericAlbum from '../../assets/genericAlbum.png';
 const { Text } = Typography;
 
 const TrackCard = ({ cancion }) => {
-  // Formatear segundos a mm:ss
+  // Formateamos segundos a mm:ss
   const formatTime = (s) => (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
 
   return (

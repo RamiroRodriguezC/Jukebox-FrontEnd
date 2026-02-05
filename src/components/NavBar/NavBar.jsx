@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { message, Drawer, Button, Grid } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
-
-// IMPORTANTE: Importar el componente hijo
 import NavItems from './NavItems'; 
 
 import './Navbar.css';

@@ -22,12 +22,7 @@
   border-radius: 4px;
 }
 
-/* --- DIFERENCIAS --- */
 
-/* Clase específica para Artistas: Foto redonda */
-.artist-img {
-  border-radius: 50%;
-}
 
 /* Titulo de las cartas  */
 .card-title {
@@ -51,6 +46,13 @@
     margin-top: 8;
 }
 
+/* --- DIFERENCIAS --- */
+
+/* Clase específica para Artistas: Foto redonda */
+.artist-img {
+  border-radius: 50%;
+}
+
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
   .card-base {
@@ -58,8 +60,5 @@
   }
 }
 
-/*
-{ color: '#f8fafc', margin: 0, fontSize: '16px' } titulo
-*/
 
 

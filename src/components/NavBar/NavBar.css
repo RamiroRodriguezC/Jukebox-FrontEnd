@@ -4,11 +4,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  background-color: #0f172a; /* Asegúrate de que el fondo sea oscuro */
+  background-color: #0f172a; 
   height: 64px;
 }
 
-/* Evita que el menú de escritorio aparezca en móvil si falla la lógica de JS */
+/* */
 @media (max-width: 767px) {
   .nav-menu {
     display: none;
@@ -34,11 +34,11 @@
   margin: 0;
 }
 
-/* La lista de navegación - AQUÍ ESTABA EL ERROR */
+/* La lista de navegación  */
 .nav-menu {
   display: flex;
   align-items: center;
-  list-style: none; /* Quita los puntos de la lista */
+  list-style: none; 
   margin: 0;
   padding: 0;
   gap: 20px; /* Espacio entre Albums, Canciones, etc. */

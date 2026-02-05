@@ -7,7 +7,7 @@ const { Meta } = Card;
 const { Text, Title } = Typography;
 
 const AlbumCard = ({ album }) => {
-  // Extraemos los datos según tu esquema de Mongoose
+  // Extraemos los datos según el esquema de Mongoose
   const { titulo, anio, url_portada, autores } = album;
 
   return (

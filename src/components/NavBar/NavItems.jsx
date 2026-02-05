@@ -11,7 +11,6 @@ const NavItems = ({ user, handleLogout, closeMenu, isMobile }) => (
 
     {user ? (
       <li className={isMobile ? "mobile-user-group" : "user-dropdown-container"}>
-        {/* Aquí podrías mantener tu lógica de dropdown para desktop o links planos para móvil */}
         <span className="user-greet">Hola, {user.nombre}</span>
         {user.rol === 'admin' && <Link to="/admin" onClick={closeMenu}>Admin</Link>}
         <Link to="/profile" onClick={closeMenu}>Perfil</Link>

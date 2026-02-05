@@ -13,29 +13,27 @@ function App() {
   const [user, setUser] = useState(() => {
   const savedUser = localStorage.getItem('user');
   
-  // Si existe en el bolsillo, lo convertimos de texto a objeto
+  // Si hay un usuario guardado en localStorage, lo parseamos y lo usamos como estado inicial
   return savedUser ? JSON.parse(savedUser) : null;
 });
   return (
     <Router>
-      {/* 1. El Navbar va FUERA de Routes para que sea visible en todas las páginas */}
+      {/* El Navbar va FUERA de Routes para que sea visible en todas las páginas */}
       <Navbar user={user} setUser={setUser} />
 
-      {/* 2. El contenedor del contenido dinámico */}
+      {/* El contenedor del contenido dinámico. Mientras el navbar se queda, este es el que "cambia" de pagina */}
       <main className="main-content">
         <Routes>
-          {/* Aquí es donde "aterriza" la página según la URL */}
+          {/* Esto es lo que mostrara el contenedor segun la URL */}
           <Route path="/" element={<Test />} />
           <Route path="/Login" element={<Login setUser={setUser}/>} />
           <Route path="/album/:id" element={<AlbumDetalle />} />
-          <Route path="*" element={<NotFound />} /> {/* Agregá esto para debuguear */}
+          <Route path="*" element={<NotFound />} /> {/* Esto pa debugear */}
 
-          
-          {/* Si el usuario toca "Albums" en el Navbar, Routes cambia lo que hay aquí */}
         </Routes>
       </main>
 
-      {/* 3. Podrías poner un Footer aquí abajo y también sería fijo */}
+      {/* Footer fijo */}
     </Router>
   );
 }

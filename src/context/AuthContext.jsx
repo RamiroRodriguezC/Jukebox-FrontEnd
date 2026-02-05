@@ -1,11 +1,12 @@
+// El context es una forma de compartir datos entre componentes sin tener que pasar props manualmente en cada nivel.
 import { createContext, useState, useEffect } from 'react';
-// 1. El context es una forma de compartir datos entre componentes sin tener que pasar props manualmente en cada nivel.
+
 // Creamos el "Contexto". 
 // Los componentes que quieran "oír" los datos del usuario se "sintonizarán" aquí.
 export const AuthContext = createContext();
 
-// 2. El provider es el canal que provee los datos (context) a los componentes hijos.
-// 'children' representa a todos los componentes que estarán dentro (toda tu App).
+// El provider es el canal que provee los datos (context) a los componentes hijos.
+// children es todo lo que esté dentro del AuthProvider en el árbol de componentes.
 export const AuthProvider = ({ children }) => {
   
   // Estado para guardar el objeto del usuario (nombre, mail, rol, etc.)
@@ -15,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   // Evita que la app se muestre "vacía" un segundo antes de cargar al usuario.
   const [loading, setLoading] = useState(true);
 
-  // 3. useEffect se ejecuta una sola vez cuando se abre la app.
+  // useEffect se ejecuta una sola vez cuando se abre la app.
   useEffect(() => {
     // Local Storage es un objeto que guarda datos en el navegador, incluso si se cierra.
     // Revisamos si en el almacenamiento del navegador (localStorage) quedó algo guardado.
@@ -30,7 +31,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // 4. Función de Login: Se llama cuando el backend nos dice que los datos son correctos.
+  // Función de Login: Se llama cuando el backend nos dice que los datos son correctos.
   const login = (userData, token) => {
     // Guardamos el token (para la API) y los datos (para la UI) en el navegador.
     localStorage.setItem('token', token);
@@ -40,7 +41,7 @@ export const AuthProvider = ({ children }) => {
     setUser(userData);
   };
 
-  // 5. Función de Logout: Limpia todo para cerrar la sesión.
+  // Función de Logout: Limpia todo para cerrar la sesión.
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -49,10 +50,10 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  // 6. El Provider devuelve el canal con los datos y funciones que queremos compartir.
+  // El Provider devuelve el canal con los datos y funciones que queremos compartir.
   return (
     <AuthContext.Provider value={{ user, login, logout, loading }}>
-      {/* Si está cargando (revisando el localStorage), podemos mostrar un mensaje o nada */}
+      {/* Si no está cargando, mostramos los hijos (la app)  */}
       {!loading && children}
     </AuthContext.Provider>
   );
