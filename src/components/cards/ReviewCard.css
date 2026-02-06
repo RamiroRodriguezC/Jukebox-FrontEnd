@@ -1,0 +1,47 @@
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.review-card {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  border-radius: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.reviewer-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.reviewer-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.review-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.review-text {
+  font-size: 0.9rem;
+  color: #d1d5db;
+  line-height: 1.4;
+}

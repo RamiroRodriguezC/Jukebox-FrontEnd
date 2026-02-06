@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// Usamos la URL del backend en Render
+// Usamos la URL del backend en Render const API_URL = import.meta.env.VITE_API_URL;
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const loginUser = async (mail, password) => {
