@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Star, Clock, User } from 'lucide-react';
-import ReviewCard from '../components/cards/ReviewCard.jsx';
+import ReviewSection from '../components/reviewSection/ReviewSection';
+import EntityHeader from '../components/EntityHeader/EntityHeader';
+import TrackList from '../components/TrackList/TrackList';
 
 // --- CONFIGURACIÓN DE LA API ---
 // IMPORTANTE: En tu entorno local con Vite, puedes usar:
@@ -10,7 +12,7 @@ import ReviewCard from '../components/cards/ReviewCard.jsx';
 const API_URL = 'https://jukebox-rpt0.onrender.com'; // <--- CAMBIA ESTO POR TU URL REAL
 
 // Importamos el CSS
-import './AlbumDetail.css';
+import './Detail.css';
 
 const AlbumDetail = () => {
   const { id } = useParams();
@@ -18,13 +20,6 @@ const AlbumDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [reviews, setReviews] = useState([]); // Nuevo estado para las reseñas reales
-
-  // Helper duración
-  const formatDuration = (seconds) => {
-    const min = Math.floor(seconds / 60);
-    const sec = seconds % 60;
-    return `${min}:${sec < 10 ? '0' : ''}${sec}`;
-  };
 
   useEffect(() => {
     const fetchAlbum = async () => {
@@ -70,84 +65,35 @@ const AlbumDetail = () => {
   const rating = album?.promedioRating || 0;
 
   return (
-    <div className="album-detail-container">
+    <div className="detail-container">
 
-      {/* Navbar */}
-      <nav className="ad-nav">
-        <Link to="/albums" className="ad-back-link">
-          <ArrowLeft size={18} /> Volver
-        </Link>
-      </nav>
+      <div className="d-main-content">
 
-      <div className="ad-main-content">
-
-        {/* 1. HERO SUPERIOR (Portada y Título) */}
-        <header className="ad-hero">
-          <div className="ad-cover-wrapper">
-            <img src={coverImage} alt={album.titulo} className="ad-cover-img" />
-          </div>
-
-          <div className="ad-info">
-            <span className="ad-type">Álbum</span>
-            <h1 className="ad-title">{album.titulo}</h1>
-            <p className="ad-artist">{artistName}</p>
-            <p className="ad-meta">{album.anio} • {album.generos?.join(", ")} • {album.canciones?.length || 0} canciones</p>
-          </div>
-        </header>
+        {/* 1. HEADER SUPERIOR (Portada y Título) */}
+        <EntityHeader
+          type="Álbum"
+          title={album.titulo}
+          subtitle={<p className="d-artist">{artistName}</p>}
+          image={coverImage}
+          meta={`${album.anio} • ${album.generos?.join(", ")} • ${album.canciones?.length || 0} canciones`}
+          
+          variant="square"
+        />
 
         {/* 2. GRID PRINCIPAL (Dividido en 2) */}
-        <div className="content-grid">
 
-          {/* COLUMNA IZQUIERDA: RESEÑAS */}
-          <section className="reviews-section">
+        {/* COLUMNA IZQUIERDA: REVIEWS */}
+        <div className="d-content-grid">
+          <ReviewSection
+            rating={rating}
+            totalReviews={album.cantReseñas || mockReviews.length}
+            reviews={reviews}
+            emptyMessage="Aún no hay reseñas para este álbum."
+          />
 
-            {/* Bloque de Resumen de Rating */}
-            <div className="rating-summary-card">
-              <div className="big-rating">{rating.toFixed(1)}</div>
-              <div className="stars-row">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    size={18}
-                    className={i < Math.round(rating) ? 'star-filled' : 'text-gray-600'}
-                  />
-                ))}
-              </div>
-              <div className="total-reviews">Basado en {album.cantReseñas || mockReviews.length} reseñas</div>
-            </div>
-
-            {/* Lista de Reviews */}
-            <div className="review-list">
-              {reviews.length > 0 ? (
-                reviews.map((review) => (
-                  <ReviewCard key={review._id} review={review} />
-                ))
-              ) : (
-                <p style={{ color: '#666', padding: '10px' }}>Aún no hay reseñas para este álbum.</p>
-              )}
-            </div>
-
-            <button className="btn-see-more">Ver todas las reseñas</button>
-          </section>
 
           {/* COLUMNA DERECHA: TRACKLIST (Simple) */}
-          <section className="tracklist-section">
-            <h3 className="tracklist-title">Canciones</h3>
-
-            <div className="track-list-container">
-              {album.canciones && album.canciones.length > 0 ? (
-                album.canciones.map((cancion, index) => (
-                  <div key={cancion._id} className="track-row">
-                    <div className="track-num">{index + 1}</div>
-                    <div className="track-name">{cancion.titulo}</div>
-                    <div className="track-dur">{formatDuration(cancion.duracion)}</div>
-                  </div>
-                ))
-              ) : (
-                <p style={{ color: '#666', textAlign: 'center', marginTop: '20px' }}>Sin canciones registradas.</p>
-              )}
-            </div>
-          </section>
+          <TrackList canciones={album.canciones} />
 
         </div>
       </div>

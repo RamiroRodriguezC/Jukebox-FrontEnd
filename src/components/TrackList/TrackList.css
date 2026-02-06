@@ -1,0 +1,67 @@
+/* --- SECCIÓN TRACKLIST --- */
+.tracklist-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-text);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.track-row {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto;
+  gap: 1rem;
+  padding: 0.85rem 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  align-items: center;
+  transition: background 0.2s;
+  border-radius: 4px;
+}
+
+.track-row:hover {
+  background: var(--hover-row);
+}
+
+.track-num {
+  color: #71717a;
+  font-size: 0.9rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.track-name {
+  color: #f4f4f5;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.track-row:hover .track-name { color: var(--accent-color); }
+
+.track-dur {
+  color: var(--secondary-text);
+  font-size: 0.85rem;
+  font-family: monospace;
+}
+
+/* --- Actual track style --- */
+.track-row.active-track {
+  background: var(--hover-row); /* Usamos el tinte morado sutil */
+}
+
+.track-row.active-track .track-name {
+  color: var(--accent-color); /* El nombre de la canción en morado/rosa */
+  font-weight: 700;
+}
+
+.track-row.active-track .track-num {
+  color: var(--accent-color);
+  font-size: 0.7rem; /* El icono de play un poco más pequeño */
+}
+
+/* Efecto de borde izquierdo para que destaque aún más */
+.track-row.active-track {
+  border-left: 3px solid var(--accent-color);
+  padding-left: calc(0.5rem - 3px); /* Ajuste para que no se mueva el texto */
+}

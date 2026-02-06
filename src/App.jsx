@@ -4,6 +4,7 @@ import Test from './test.jsx';
 import Navbar from './components/NavBar/NavBar.jsx';
 import Login from './pages/Login.jsx';
 import AlbumDetalle from './pages/AlbumDetail.jsx';
+import SongDetail from './pages/SongDetail.jsx';
 import { useState } from 'react';
 import './App.css';
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/" element={<Test />} />
           <Route path="/Login" element={<Login setUser={setUser}/>} />
           <Route path="/album/:id" element={<AlbumDetalle />} />
+          <Route path="/cancion/:id" element={<SongDetail />} />
           <Route path="*" element={<NotFound />} /> {/* Esto pa debugear */}
 
         </Routes>
