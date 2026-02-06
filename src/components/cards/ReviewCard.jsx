@@ -19,7 +19,7 @@ const ReviewCard = ({ review }) => {
                     ))}
                 </div>
             </div>
-            <p className="review-text">"{review.text}"</p>
+            <p className="review-text">"{review.comentario}"</p>
         </div>
     );
 }
