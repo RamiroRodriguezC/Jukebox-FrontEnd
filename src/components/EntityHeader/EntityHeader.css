@@ -8,11 +8,27 @@
   border-bottom: 1px solid var(--border-color);
 }
 
+.d-hero.Artista {
+  gap: 2rem;           /* Espacio horizontal entre la imagen y el texto */
+  padding: 20px;
+
+}
 @media (min-width: 768px) {
   .d-hero {
     flex-direction: row;
     align-items: flex-end;
   }
+
+  .d-hero.Artista {
+    flex-direction: row;
+    /* Cambia flex-end por center para que el texto se alinee al centro del círculo */
+    align-items: center; 
+    text-align: left;
+    gap: 3rem; /* Un poco más de espacio entre imagen y texto */
+  }
+
+  
+
 }
 
 .d-cover-wrapper {
@@ -23,6 +39,16 @@
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid var(--border-color);
+}
+
+/* Variante Círculo (específica para Artistas) */
+.d-cover-wrapper.circle {
+  border-radius: 50%;
+}
+
+/* Variante Cuadrada (específica para Álbumes) */
+.d-cover-wrapper.square {
+  border-radius: 6px;
 }
 
 .d-cover-img { width: 100%; height: 100%; object-fit: cover; }
@@ -46,6 +72,15 @@
   line-height: 1;
   color: white;
   margin-bottom: 1rem;
+}
+
+.d-title.Artista {
+  font-size: 4rem;
+  font-weight: 1000;
+  line-height: 1;
+  color: white;
+  margin-bottom: 1rem;
+
 }
 
 .d-artist {

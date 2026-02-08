@@ -24,7 +24,6 @@ const AlbumDetail = () => {
   useEffect(() => {
     const fetchAlbum = async () => {
       try {
-        // Ajusta la ruta si tu backend usa plural '/albums'
         const response = await fetch(`${API_URL}/albums/${id}`);
 
         if (!response.ok) {

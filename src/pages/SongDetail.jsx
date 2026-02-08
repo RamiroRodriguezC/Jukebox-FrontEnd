@@ -29,7 +29,6 @@ useEffect(() => {
       const songRes = await fetch(`${API_URL}/canciones/${id}`);
       const songData = await songRes.json();
       
-      // Ajuste según tu API: ¿Es songData o songData.data?
       const actualSong = songData.data || songData; 
       setCancion(actualSong);
 
@@ -45,7 +44,6 @@ useEffect(() => {
       const albumId = actualSong.album?._id || actualSong.album;
 
       if (albumId) {
-        // ¡OJO! Aquí debe ser la ruta de ALBUMS, no de REVIEWS
         const albumRes = await fetch(`${API_URL}/albums/${albumId}`);
         if (albumRes.ok) {
           const albumData = await albumRes.json();
@@ -89,7 +87,7 @@ useEffect(() => {
                     title={cancion.titulo}
                     subtitle={<p className="d-artist">{artistName}</p>}
                     image={coverImage}
-                    meta={`${cancion.anio} • ${cancion.generos?.join(", ")} • ${formatDuration(cancion.duracion || 0)} min`}
+                    meta={`${cancion.generos?.join(", ")} • ${formatDuration(cancion.duracion || 0)} min`}
 
                     variant="square"
                 />

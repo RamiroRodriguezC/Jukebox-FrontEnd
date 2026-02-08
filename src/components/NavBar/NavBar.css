@@ -3,8 +3,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  background-color: #0f172a; 
+  padding: 0 18px;
+  background-color: #00051a; 
   height: 64px;
 }
 
@@ -31,7 +31,7 @@
 .brand-title {
   color: #ffffff; /* Un color violeta/azul para resaltar */
   font-size: 1.5rem;
-  margin: 0;
+  margin: 1;
 }
 
 /* La lista de navegación  */
