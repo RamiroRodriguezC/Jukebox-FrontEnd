@@ -25,7 +25,7 @@ const AlbumCard = ({ album }) => {
     >
       <Card.Meta 
         title={<span className="card-title">{album.titulo}</span>} 
-        description={<span className="card-subtitle">{autores.map(a => a.nombre).join(', ')}</span>} 
+        description={autores && <span className="card-subtitle">{autores.map(a => a.nombre).join(', ')}</span>} 
       />
       <div> 
       <Tag className="card-tag">Album</Tag>
