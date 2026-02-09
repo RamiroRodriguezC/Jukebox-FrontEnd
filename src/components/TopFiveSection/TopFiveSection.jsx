@@ -7,6 +7,7 @@ const TopFiveSection = ({ title, items, type, isOwner, onEdit }) => {
   // Aseguramos que siempre vea máximo 5, por más que la lista sea larga
   const topItems = items?.slice(0, 5) || [];
 
+
   return (
     <section className="top-five-container">
       <div className="top-five-header">
@@ -23,16 +24,25 @@ const TopFiveSection = ({ title, items, type, isOwner, onEdit }) => {
 
       <div className="top-five-grid">
         {topItems.length > 0 ? (
-          topItems.map((item, index) => (
-            <div key={item._id} className="top-five-item">
-              <span className="item-rank">{index + 1}</span>
-              {type === 'album' ? (
-                <AlbumCard album={item} />
-              ) : (
-                <SongCard song={item} />
-              )}
-            </div>
-          ))
+          topItems.map((item, index) => {
+            // item._id es el objeto poblado (el álbum o canción completo), pq despues del populate queda:
+            // items: [
+            //   {
+            //     _id: { // <-- este es el álbum o canción completo gracias al populate
+            //       _id: "123", etc etc}}
+            const objetoReal = item._id;
+
+            return (
+              <div key={objetoReal._id || index} className="top-five-item">
+                <span className="item-rank">{index + 1}</span>
+                {type === 'album' ? (
+                  <AlbumCard album={objetoReal} />
+                ) : (
+                  <SongCard song={objetoReal} />
+                )}
+              </div>
+            );
+          })
         ) : (
           <div className="top-five-empty">
             <p>No has seleccionado tus favoritos aún.</p>
