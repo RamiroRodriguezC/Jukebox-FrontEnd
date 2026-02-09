@@ -1,21 +1,16 @@
 import React from 'react';
-import { Star } from 'lucide-react'; 
-import ReviewCard from '../cards/AlbumCard';
+import AlbumCard from '../cards/AlbumCard';
 import './topArtistAlbums.css';
 
-const topAlbumsSection = ({albums}) => {
+const TopAlbumsSection = ({albums}) => {
   return (
     <section className="topAlbums-section">
-      
+      <h3 className="section-title">Álbumes Destacados</h3>
       {/* Bloque de Resumen de Rating */}
-      <div className="albums.list">
-        {albums.length > 0 ? (
-          albums.map((album) => (
+      <div className="albums-grid">
+          {albums.map((album) => (
             <AlbumCard album={album} />
-          ))
-        ) : (
-          <p className="empty-message">{emptyMessage}</p>
-        )}
+          ))}
       </div>
         
       <button className="btn-see-more">Ver todas los albunes</button>
@@ -23,4 +18,4 @@ const topAlbumsSection = ({albums}) => {
   );
 };
 
-export default ReviewSection;
+export default TopAlbumsSection;

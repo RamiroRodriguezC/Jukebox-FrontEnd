@@ -6,6 +6,7 @@ import Login from './pages/Login.jsx';
 import AlbumDetalle from './pages/AlbumDetail.jsx';
 import SongDetail from './pages/SongDetail.jsx';
 import ArtistaDetail from './pages/ArtistaDetails.jsx';
+import Profile from './pages/Profile.jsx';
 import { useState } from 'react';
 import './App.css';
 
@@ -32,6 +33,8 @@ function App() {
           <Route path="/album/:id" element={<AlbumDetalle />} />
           <Route path="/cancion/:id" element={<SongDetail />} />
           <Route path="/artista/:id" element={<ArtistaDetail />} />
+          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} /> {/* Esto pa debugear */}
 
         </Routes>

@@ -5,11 +5,8 @@ import ReviewSection from '../components/reviewSection/ReviewSection';
 import EntityHeader from '../components/EntityHeader/EntityHeader';
 import TrackList from '../components/TrackList/TrackList';
 
-// --- CONFIGURACIÓN DE LA API ---
-// IMPORTANTE: En tu entorno local con Vite, puedes usar:
-// const API_URL = import.meta.env.VITE_API_URL;
-// Para este ejemplo, usamos una cadena directa:
-const API_URL = 'https://jukebox-rpt0.onrender.com'; // <--- CAMBIA ESTO POR TU URL REAL
+
+const API_URL = 'https://jukebox-rpt0.onrender.com'; 
 
 // Importamos el CSS
 import './Detail.css';
@@ -40,9 +37,8 @@ const AlbumDetail = () => {
         // el ok significa que el backend devolvio un 200, osea que la consulta fue exitosa.
         if (reviewsRes.ok) {
           const reviewsData = await reviewsRes.json();
-          // Dependiendo de cómo devuelva los datos tu globalService, 
-          // podrías necesitar reviewsData.docs o simplemente reviewsData
-          setReviews(reviewsData.docs || reviewsData);
+
+          setReviews(reviewsData.docs);
         }
 
       } catch (err) {
@@ -81,8 +77,9 @@ const AlbumDetail = () => {
 
         {/* 2. GRID PRINCIPAL (Dividido en 2) */}
 
-        {/* COLUMNA IZQUIERDA: REVIEWS */}
+        
         <div className="d-content-grid">
+          {/* COLUMNA IZQUIERDA: REVIEWS */}
           <ReviewSection
             rating={rating}
             totalReviews={album.cantReseñas || mockReviews.length}

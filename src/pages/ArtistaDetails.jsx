@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import EntityHeader from '../components/EntityHeader/EntityHeader';
+import TopAlbumsSection from '../components/TopArtistAlbums/TopArtistAlbums';
+import AboutArtistSection from '../components/AboutArtistSection/AboutArtistSection';
+import TopTracksSection from '../components/TopTracksSection/TopTracksSection';
 
-// --- CONFIGURACIÓN DE LA API ---
-// IMPORTANTE: En tu entorno local con Vite, puedes usar:
-// const API_URL = import.meta.env.VITE_API_URL;
-// Para este ejemplo, usamos una cadena directa:
-const API_URL = 'https://jukebox-rpt0.onrender.com'; // <--- CAMBIA ESTO POR TU URL REAL
+
+const API_URL = 'https://jukebox-rpt0.onrender.com'; 
 
 // Importamos el CSS
 import './Detail.css';
@@ -14,6 +14,7 @@ import './Detail.css';
 const ArtistaDetail = () => {
   const { id } = useParams();
   const [artista, setArtista] = useState(null);
+  const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -26,6 +27,14 @@ const ArtistaDetail = () => {
           const errData = await response.json().catch(() => ({}));
           throw new Error(errData.msg || 'Error al cargar el artista');
         }
+
+        const albumsRes = await fetch(`${API_URL}/albums/artista/${id}`);
+        if (!albumsRes.ok) {
+          console.warn('No se pudieron cargar los álbumes del artista');
+        } 
+        const albumsData = await albumsRes.json();
+        setAlbums(albumsData.data || albumsData );
+
 
         const data = await response.json();
         setArtista(data.data || data);
@@ -44,7 +53,7 @@ const ArtistaDetail = () => {
   if (error) return <div className="loading-screen" style={{ color: '#ef4444' }}>{error}</div>;
 
   // Datos procesados con fallbacks seguros
-  const coverImage = artista?.url_portada || `https://placehold.co/400x400/222/fff?text=${artista?.nombre || 'Artista'}`;
+  const coverImage = artista?.url_foto || `https://placehold.co/400x400/222/fff?text=${artista?.nombre || 'Artista'}`;
 
   return (
     <div className="detail-container">
@@ -63,7 +72,14 @@ const ArtistaDetail = () => {
 
         {/* COLUMNA IZQUIERDA: REVIEWS */}
         <div className="d-content-grid">
-          
+          <TopAlbumsSection albums={albums} />
+        
+
+        {/* COLUMNA DERECHA: ABOUT & TOP TRACKS */}
+        <div>
+          <AboutArtistSection artista={artista} />
+          <TopTracksSection artistaId={id} />
+        </div>
         </div>
       </div>
     </div>
