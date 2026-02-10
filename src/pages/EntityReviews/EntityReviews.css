@@ -1,0 +1,77 @@
+/* Contenedor principal */
+.detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: 100vh;
+  color: #fff;
+}
+
+/* Encabezado y navegación */
+.reviews-header {
+  margin-bottom: 30px;
+}
+
+.back-link {
+  color: #b3b3b3;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  transition: color 0.2s ease;
+  width: fit-content;
+}
+
+.back-link:hover {
+  color: #1db954; /* Color verde estilo Spotify o el que uses de acento */
+}
+
+.reviews-header h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(to right, #fff, #888);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Pantallas de Carga y Error */
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  font-size: 1.2rem;
+  color: #b3b3b3;
+  gap: 20px;
+}
+
+/* Spinner animado opcional */
+.loading-screen::after {
+  content: "";
+  width: 40px;
+  height: 40px;
+  border: 4px solid #333;
+  border-top: 4px solid #1db954;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Adaptabilidad para móviles */
+@media (max-width: 768px) {
+  .reviews-header h2 {
+    font-size: 1.8rem;
+  }
+  
+  .detail-container {
+    padding: 20px 15px;
+  }
+}

@@ -1,12 +1,21 @@
 import React from 'react';
-import { Star } from 'lucide-react'; 
+import { Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import ReviewCard from '../cards/ReviewCard';
 import './ReviewSection.css';
 
-const ReviewSection = ({ rating, totalReviews, reviews, emptyMessage = "Aún no hay reseñas." }) => {
+const ReviewSection = ({ 
+  rating, 
+  totalReviews, 
+  reviews, 
+  emptyMessage = "Aún no hay reseñas.",
+  entityId,
+  entityName,
+  entityType // Puede ser 'album' o 'cancion' 
+   }) => {
   return (
     <section className="reviews-section">
-      
+
       {/* Bloque de Resumen de Rating */}
       <div className="rating-summary-card">
         <div className="big-rating">{rating.toFixed(1)}</div>
@@ -34,8 +43,20 @@ const ReviewSection = ({ rating, totalReviews, reviews, emptyMessage = "Aún no 
           <p className="empty-message">{emptyMessage}</p>
         )}
       </div>
-
-      <button className="btn-see-more">Ver todas las reseñas</button>
+      <div>
+        {/* Link para ver todas las reseñas, pasando el nombre de la canción por el state */}
+        <Link
+          to={`/reviews/${entityType}/${entityId}`}
+          state={{
+            nombre: entityName,
+            entityType: entityType
+            
+          }}
+          className="btn-more-reviews"
+        >
+          <button className="btn-see-more">Ver todas las reseñas</button>
+        </Link>
+      </div>
     </section>
   );
 };

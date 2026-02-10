@@ -15,102 +15,105 @@ const API_URL = 'https://jukebox-rpt0.onrender.com'; // <--- CAMBIA ESTO POR TU 
 import './Detail.css';
 
 const SongDetail = () => {
-    const { id } = useParams();
-    const [cancion, setCancion] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [reviews, setReviews] = useState([]); // Nuevo estado para las reseñas reales
-    const [albumTracks, setAlbumTracks] = useState([]);
+  const { id } = useParams();
+  const [cancion, setCancion] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [reviews, setReviews] = useState([]); // Nuevo estado para las reseñas reales
+  const [albumTracks, setAlbumTracks] = useState([]);
 
-useEffect(() => {
-  const fetchSongAndAlbum = async () => {
-    try {
-      // 1. Buscamos la canción actual
-      const songRes = await fetch(`${API_URL}/canciones/${id}`);
-      const songData = await songRes.json();
-      
-      const actualSong = songData.data || songData; 
-      setCancion(actualSong);
+  useEffect(() => {
+    const fetchSongAndAlbum = async () => {
+      try {
+        // 1. Buscamos la canción actual
+        const songRes = await fetch(`${API_URL}/canciones/${id}`);
+        const songData = await songRes.json();
 
-      // 2. Traemos las reviews de la canción
-      const reviewsRes = await fetch(`${API_URL}/reviews/Cancion/${id}?limit=3`);
-      if (reviewsRes.ok) {
-        const reviewsData = await reviewsRes.json();
-        setReviews(reviewsData.docs || reviewsData.data || reviewsData);
-      }
+        const actualSong = songData.data || songData;
+        setCancion(actualSong);
 
-      // 3. Buscamos el álbum completo para el Tracklist
-      // Verificamos si existe el álbum y obtenemos su ID sea objeto o string
-      const albumId = actualSong.album?._id || actualSong.album;
-
-      if (albumId) {
-        const albumRes = await fetch(`${API_URL}/albums/${albumId}`);
-        if (albumRes.ok) {
-          const albumData = await albumRes.json();
-          const actualAlbum = albumData.data || albumData;
-          setAlbumTracks(actualAlbum.canciones || []);
+        // 2. Traemos las reviews de la canción
+        const reviewsRes = await fetch(`${API_URL}/reviews/Cancion/${id}?limit=3`);
+        if (reviewsRes.ok) {
+          const reviewsData = await reviewsRes.json();
+          setReviews(reviewsData.docs || reviewsData.data || reviewsData);
         }
+
+        // 3. Buscamos el álbum completo para el Tracklist
+        // Verificamos si existe el álbum y obtenemos su ID sea objeto o string
+        const albumId = actualSong.album?._id || actualSong.album;
+
+        if (albumId) {
+          const albumRes = await fetch(`${API_URL}/albums/${albumId}`);
+          if (albumRes.ok) {
+            const albumData = await albumRes.json();
+            const actualAlbum = albumData.data || albumData;
+            setAlbumTracks(actualAlbum.canciones || []);
+          }
+        }
+
+      } catch (err) {
+        console.error("Error fetching song:", err);
+        setError('Canción no encontrada o error de conexión');
+      } finally {
+        setLoading(false);
       }
+    };
+    fetchSongAndAlbum();
+  }, [id]);
 
-    } catch (err) {
-      console.error("Error fetching song:", err);
-      setError('Canción no encontrada o error de conexión');
-    } finally {
-      setLoading(false);
-    }
-  };
-  fetchSongAndAlbum();
-}, [id]);
+  if (loading) return <div className="loading-screen">Cargando...</div>;
+  if (error) return <div className="loading-screen" style={{ color: '#ef4444' }}>{error}</div>;
 
-    if (loading) return <div className="loading-screen">Cargando...</div>;
-    if (error) return <div className="loading-screen" style={{ color: '#ef4444' }}>{error}</div>;
+  // Datos procesados con fallbacks seguros
+  const coverImage = cancion?.album.url_portada || `https://placehold.co/400x400/222/fff?text=${cancion.album?.titulo || 'Canción'}`;
+  const artistName = cancion?.autores?.map(a => a.nombre).join(", ") || "Artista Desconocido";
+  const rating = cancion?.promedioRating || 0;
 
-    // Datos procesados con fallbacks seguros
-    const coverImage = cancion?.album.url_portada || `https://placehold.co/400x400/222/fff?text=${cancion.album?.titulo || 'Canción'}`;
-    const artistName = cancion?.autores?.map(a => a.nombre).join(", ") || "Artista Desconocido";
-    const rating = cancion?.promedioRating || 0;
-
-    const formatDuration = (seconds) => {
+  const formatDuration = (seconds) => {
     const min = Math.floor(seconds / 60);
     const sec = seconds % 60;
     return `${min}:${sec < 10 ? '0' : ''}${sec}`;
-    };
+  };
 
-    return (
-        <div className="detail-container">
+  return (
+    <div className="detail-container">
 
-            <div className="d-main-content">
+      <div className="d-main-content">
 
-                {/* 1. HEADER SUPERIOR (Portada y Título) */}
-                <EntityHeader
-                    type="Canción"
-                    title={cancion.titulo}
-                    subtitle={<p className="d-artist">{artistName}</p>}
-                    image={coverImage}
-                    meta={`${cancion.generos?.join(", ")} • ${formatDuration(cancion.duracion || 0)} min`}
+        {/* 1. HEADER SUPERIOR (Portada y Título) */}
+        <EntityHeader
+          type="Canción"
+          title={cancion.titulo}
+          subtitle={<p className="d-artist">{artistName}</p>}
+          image={coverImage}
+          meta={`${cancion.generos?.join(", ")} • ${formatDuration(cancion.duracion || 0)} min`}
 
-                    variant="square"
-                />
+          variant="square"
+        />
 
-                {/* 2. GRID PRINCIPAL (Dividido en 2) */}
+        {/* 2. GRID PRINCIPAL (Dividido en 2) */}
 
-                {/* COLUMNA IZQUIERDA: REVIEWS */}
-                <div className="d-content-grid">
-                    <ReviewSection
-                        rating={rating}
-                        totalReviews={cancion.cantReseñas || mockReviews.length}
-                        reviews={reviews}
-                        emptyMessage="Aún no hay reseñas para este álbum."
-                    />
+        {/* COLUMNA IZQUIERDA: REVIEWS */}
+        <div className="d-content-grid">
+          <div>
+            <ReviewSection
+              rating={rating}
+              totalReviews={cancion.cantReseñas || mockReviews.length}
+              reviews={reviews}
+              emptyMessage="Aún no hay reseñas para esta canción."
+              entityId={id}
+              entityName={cancion.titulo}
+              entityType="Cancion"
+            />
+          </div>
+          {/* COLUMNA DERECHA: TRACKLIST (Simple) */}
+          <TrackList canciones={albumTracks} currentTrackId={cancion._id} />
 
-
-                    {/* COLUMNA DERECHA: TRACKLIST (Simple) */}
-                    <TrackList canciones={albumTracks} currentTrackId={cancion._id} />
-
-                </div>
-            </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default SongDetail;

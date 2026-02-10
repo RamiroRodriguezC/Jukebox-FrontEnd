@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Star, Clock, User } from 'lucide-react';
-import ReviewSection from '../components/reviewSection/ReviewSection';
+import ReviewSection from '../components/ReviewSection/ReviewSection';
 import EntityHeader from '../components/EntityHeader/EntityHeader';
 import TrackList from '../components/TrackList/TrackList';
 
@@ -80,13 +80,17 @@ const AlbumDetail = () => {
         
         <div className="d-content-grid">
           {/* COLUMNA IZQUIERDA: REVIEWS */}
+          <div>
           <ReviewSection
             rating={rating}
             totalReviews={album.cantReseñas || mockReviews.length}
             reviews={reviews}
             emptyMessage="Aún no hay reseñas para este álbum."
+            entityId={id}
+            entityName={album.titulo}
+            entityType="Album"
           />
-
+          </div> 
 
           {/* COLUMNA DERECHA: TRACKLIST (Simple) */}
           <TrackList canciones={album.canciones} />

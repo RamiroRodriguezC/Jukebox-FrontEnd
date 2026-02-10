@@ -1,0 +1,33 @@
+.search-result-card {
+  display: flex;
+  align-items: center;
+  background: #1a1a1a;
+  border-bottom: 1px solid #333;
+  padding: 10px;
+  gap: 15px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.search-result-card:hover {
+  background: #252525;
+}
+
+.card-image {
+  width: 50px; /* Tamaño pequeño tipo miniatura */
+  height: 75px; /* Más alto que ancho como un poster/tapa */
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.card-subtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #999;
+}

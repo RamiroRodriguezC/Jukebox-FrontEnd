@@ -1,0 +1,31 @@
+.reviews-scroll-container {
+  padding: 20px 0;
+  width: 100%;
+}
+
+.scroll-title {
+  margin-bottom: 25px;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.scroll-track {
+  display: flex;
+  flex-direction: column; /* Cambiamos horizontal por vertical */
+  gap: 20px;              /* Espacio entre tarjetas */
+  width: 100%;
+  overflow-x: hidden;     /* Eliminamos el scroll lateral */
+}
+
+.scroll-item {
+  width: 100%;            /* Ocupa todo el ancho disponible */
+  max-width: 900px;       /* Opcional: Centra y limita en pantallas muy anchas */
+  margin: 0 auto;         /* Centra la lista */
+  flex: 1 1 auto;         /* Quitamos el ancho fijo de 300px */
+  transition: transform 0.2s ease;
+}
+
+.scroll-item:hover {
+  transform: translateX(5px); /* Pequeño efecto visual al pasar el mouse */
+}
