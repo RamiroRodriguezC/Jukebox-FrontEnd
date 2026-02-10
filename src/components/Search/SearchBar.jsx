@@ -13,3 +13,5 @@ const SearchBar = ({ query, setQuery }) => {
     </div>
   );
 };
+
+export default SearchBar;

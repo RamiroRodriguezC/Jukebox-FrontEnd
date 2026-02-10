@@ -2,7 +2,7 @@
 
 // SearchCategoryNav.jsx
 const SearchCategoryNav = ({ activeCategory, setCategory }) => {
-  const categories = ['Albums', 'Canciones', 'Artistas', 'Usuarios'];
+  const categories = ['Album', 'Cancion', 'Artista', 'Usuario'];
 
   return (
     <div className="search-nav">
@@ -18,3 +18,5 @@ const SearchCategoryNav = ({ activeCategory, setCategory }) => {
     </div>
   );
 };
+
+export default SearchCategoryNav;
