@@ -9,7 +9,7 @@ const API_URL = 'https://jukebox-rpt0.onrender.com';
 
 const SearchPage = () => {
   const [query, setQuery] = useState('');
-  const [category, setCategory] = useState('albums');
+  const [category, setCategory] = useState('Album');
   const [results, setResults] = useState([]);
 
   useEffect(() => {

@@ -10,7 +10,7 @@ const SearchCategoryNav = ({ activeCategory, setCategory }) => {
         <button
           key={cat}
           className={`search-nav-item ${activeCategory === cat.toLowerCase() ? 'active' : ''}`}
-          onClick={() => setCategory(cat.toLowerCase())}
+          onClick={() => setCategory(cat)}
         >
           {cat}
         </button>

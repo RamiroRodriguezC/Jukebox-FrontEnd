@@ -9,14 +9,14 @@ const SearchResultCard = ({ item, type }) => {
   const image = item.url_portada || item.url_perfil || "https://via.placeholder.com/150";
 
   return (
-    <Link to={`/${type}/${item._id}`}>
-    <div className="search-result-card">
-      <img src={image} alt={title} className="card-image" />
-      <div className="card-info">
-        <h4 className="card-title">{title}</h4>
-        {subtitle && <p className="card-subtitle">{subtitle}</p>}
+    <Link to={`/${type}/${item._id}`} className="search-result-link">
+      <div className="search-result-card">
+        <img src={image} alt={title} className="card-image" />
+        <div className="card-info">
+          <h4 className="card-title">{title}</h4>
+          {subtitle && <p className="card-subtitle">{subtitle}</p>}
+        </div>
       </div>
-    </div>
     </Link>
   );
 };

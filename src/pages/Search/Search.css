@@ -1,33 +1,119 @@
+/* Search.css */
+
+/* Contenedor principal de la página */
+.search-page-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* --- BARRA DE BÚSQUEDA --- */
+.search-bar-container {
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 1rem;
+  border-radius: 500px; /* Estilo píldora */
+  border: none;
+  background-color: #242424;
+  color: white;
+  outline: none;
+  transition: background-color 0.3s;
+}
+
+.search-input:focus {
+  background-color: #2a2a2a;
+  box-shadow: 0 0 0 1px #555;
+}
+
+/* --- NAVEGACIÓN DE CATEGORÍAS --- */
+.search-nav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.search-nav-item {
+  background: #282828;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.search-nav-item:hover {
+  background: #3e3e3e;
+}
+
+.search-nav-item.active {
+  background: #fff;
+  color: #000;
+}
+
+/* --- LISTA Y TARJETAS --- */
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* El Link que envuelve la tarjeta */
+.results-list a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 .search-result-card {
   display: flex;
   align-items: center;
-  background: #1a1a1a;
-  border-bottom: 1px solid #333;
-  padding: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
   gap: 15px;
-  transition: background 0.2s;
-  cursor: pointer;
+  transition: background 0.3s;
 }
 
 .search-result-card:hover {
-  background: #252525;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .card-image {
-  width: 50px; /* Tamaño pequeño tipo miniatura */
-  height: 75px; /* Más alto que ancho como un poster/tapa */
+  width: 55px;
+  height: 55px;
   object-fit: cover;
   border-radius: 4px;
 }
 
+/* Estilo circular para Artistas y Usuarios */
+.search-result-card[data-type="artista"] .card-image,
+.search-result-card[data-type="usuario"] .card-image {
+  border-radius: 50%;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .card-title {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  font-weight: 500;
   color: #fff;
 }
 
 .card-subtitle {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #999;
+  margin: 3px 0 0 0;
+  font-size: 0.85rem;
+  color: #b3b3b3;
 }
