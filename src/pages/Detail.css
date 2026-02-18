@@ -32,7 +32,7 @@
 
 @media (min-width: 900px) {
   .d-content-grid {
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns: 1fr 1fr;
     align-items: start;
   }
 }

@@ -1,6 +1,7 @@
+/* Ajuste para que la sección no se pegue al borde */
 .topAlbums-section {
-  max-width: 900px; /* Limita el ancho total de la sección de álbumes */
-  margin: 0 auto;
+  max-width: 100%; 
+  margin: 0;
 }
 
 .section-title {
@@ -9,10 +10,18 @@
   margin-bottom: 20px;
 }
 
+/* En TopArtistAlbums.css */
 .albums-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+  /* Forzamos 2 columnas fijas */
+  grid-template-columns: repeat(2, 1fr); 
   gap: 20px;
+}
+
+.albums-grid > * {
+  /* Evita que la tarjeta se estire demasiado horizontalmente */
+  max-width: 280px; 
+  width: 100%;
 }
 
 /* Botón Ver Todos */

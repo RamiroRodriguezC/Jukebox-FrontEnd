@@ -1,11 +1,9 @@
 import axios from 'axios';
-
-// Usamos la URL del backend en Render const API_URL = import.meta.env.VITE_API_URL;
-const API_URL = import.meta.env.VITE_API_URL;
+import api from '../api/api.js';
 
 export const loginUser = async (mail, password) => {
     try {
-        const response = await axios.post(`${API_URL}/usuarios/login`, {
+        const response = await api.post(`/usuarios/login`, {
             mail: mail,
             password : password // Tiene que ser el nombre que espera el backend, no "password" o "contraseña" o algo asi. Tiene que ser EXACTAMENTE "password" porque el backend lo lee con ese nombre.
         });

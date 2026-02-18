@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import EntityHeader from '../components/EntityHeader/EntityHeader';
 import TopFiveSection from '../components/TopFiveSection/TopFiveSection';
-
-const API_URL = 'https://jukebox-rpt0.onrender.com';
+import api from '../api/api.js';
 
 // Importamos el CSS
 import './Detail.css';
 
 const Profile = () => {
+    // Obtenemos el ID desde la URL (si es que existe)
     const { id } = useParams();
     const [usuario, setUsuario] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -16,17 +16,20 @@ const Profile = () => {
 
     useEffect(() => {
         const fetchUsuario = async () => {
+            setLoading(true);
             try {
-                // 1. Obtener el string del localStorage
+                // 1. Manoteamos el string del storage (el que guardamos cuando el loco hizo login)
                 const userStorage = localStorage.getItem('user');
 
-                // 2. Convertirlo de texto a objeto y sacar el ID
+                // 2. Si hay algo, lo parseamos para sacar el ID
                 let loggedInUserId = null;
                 if (userStorage) {
                     const parsedUser = JSON.parse(userStorage);
-                    loggedInUserId = parsedUser.id;
+                    // Chequeamos si es _id (Mongo) o id a secas para que no se nos escape nada
+                    loggedInUserId = parsedUser._id || parsedUser.id;
                 }
-                // SI no hay id en la URL, usamos el del usuario logueado
+                
+                // Si la URL no trae ID, usamos el del que está logueado ahora
                 const targetId = id || loggedInUserId;
 
                 if (!targetId) {
@@ -35,20 +38,19 @@ const Profile = () => {
                     return;
                 }
 
-                const response = await fetch(`${API_URL}/usuarios/${targetId}`);
+                // 3. Mandamos el GET con Axios (la URL base ya está en la instancia 'api')
+                const response = await api.get(`/usuarios/${targetId}`);
 
-                if (!response.ok) {
-                    const errData = await response.json().catch(() => ({}));
-                    throw new Error(errData.msg || 'Error al cargar el usuario');
-                }
-
-                const data = await response.json();
-
-                setUsuario(data.data || data);
+                // 4. Axios ya nos deja la data servida en bandeja dentro de .data
+                // Metemos este fallback por si el back devuelve el objeto envuelto o directo
+                const userData = response.data.data || response.data;
+                setUsuario(userData);
 
             } catch (err) {
-                console.error("Error fetching user:", err);
-                setError('Usuario no encontrado o error de conexión');
+                console.error("Se rompió algo buscando al user:", err);
+                // Atajamos el mensaje que escupe el back para no mostrar cualquier fruta
+                const msg = err.response?.data?.message || 'Usuario no encontrado o error de conexión';
+                setError(msg);
             } finally {
                 setLoading(false);
             }
@@ -58,42 +60,46 @@ const Profile = () => {
 
     if (loading) return <div className="loading-screen">Cargando...</div>;
     if (error) return <div className="loading-screen" style={{ color: '#ef4444' }}>{error}</div>;
+    
+    // Si llegamos acá, es porque somos unos cracks y tenemos el usuario
+    if (!usuario) return null;
 
-    // Datos procesados con fallbacks seguros
+    // Foto de perfil o un placeholder para que no quede un hueco feo
     const coverImage = usuario?.url_profile_photo || `https://placehold.co/400x400/222/fff?text=${usuario?.username || 'Usuario'}`;
 
     return (
         <div className="detail-container">
-
             <div className="d-main-content">
 
-                {/* 1. HEADER SUPERIOR (Portada y Título) */}
+                {/* 1. HEADER SUPERIOR (La cara del user y el nombre) */}
                 <EntityHeader
                     type="User"
                     title={usuario.username}
                     image={coverImage}
                     variant="circle"
                 />
+
                 {/* 2. BIOGRAFÍA */}
                 <div className="d-section">
                     <h2>Biografía</h2>
-                    <p>{usuario.bio || "Este usuario no ha escrito una biografía."}</p>
+                    <p>{usuario.bio || "Este usuario no ha escrito una biografía todavía."}</p>
                 </div>
-                {/* 3. LISTAS */}
+
+                {/* 3. LISTAS (Acá clavamos optional chaining para que no explote si está vacío) */}
                 <TopFiveSection
                     title="Mis Álbumes"
-                    items={usuario.lists?.favoriteAlbums.items || []}
+                    items={usuario.lists?.favoriteAlbums?.items || []}
                     type="album"
                     isOwner={true}
-                    onEdit={() => openModal('album')}
+                    onEdit={() => console.log('Editando álbumes...')}
                 />
 
                 <TopFiveSection
                     title="Mis Canciones"
-                    items={usuario.lists?.favoriteSongs.items || []}
+                    items={usuario.lists?.favoriteSongs?.items || []}
                     type="song"
                     isOwner={true}
-                    onEdit={() => openModal('song')}
+                    onEdit={() => console.log('Editando canciones...')}
                 />
 
             </div>

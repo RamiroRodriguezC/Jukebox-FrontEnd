@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Star, Clock, User } from 'lucide-react';
-import ReviewSection from '../components/reviewSection/ReviewSection';
+import ReviewSection from '../components/ReviewSection/ReviewSection';
 import EntityHeader from '../components/EntityHeader/EntityHeader';
 import TrackList from '../components/TrackList/TrackList';
+import api from '../api/api.js';
 
-// --- CONFIGURACIÓN DE LA API ---
-// IMPORTANTE: En tu entorno local con Vite, puedes usar:
-// const API_URL = import.meta.env.VITE_API_URL;
-// Para este ejemplo, usamos una cadena directa:
-const API_URL = 'https://jukebox-rpt0.onrender.com'; // <--- CAMBIA ESTO POR TU URL REAL
 
 // Importamos el CSS
 import './Detail.css';
@@ -26,30 +22,23 @@ const SongDetail = () => {
     const fetchSongAndAlbum = async () => {
       try {
         // 1. Buscamos la canción actual
-        const songRes = await fetch(`${API_URL}/canciones/${id}`);
-        const songData = await songRes.json();
-
-        const actualSong = songData.data || songData;
+        const songRes = await api.get(`/canciones/${id}`);
+        const actualSong = songRes.data;
         setCancion(actualSong);
 
         // 2. Traemos las reviews de la canción
-        const reviewsRes = await fetch(`${API_URL}/reviews/Cancion/${id}?limit=3`);
-        if (reviewsRes.ok) {
-          const reviewsData = await reviewsRes.json();
-          setReviews(reviewsData.docs || reviewsData.data || reviewsData);
-        }
+        const reviewsRes = await api.get(`/reviews/Cancion/${id}?limit=3`);
+          
+        setReviews(reviewsRes.data.docs);
 
         // 3. Buscamos el álbum completo para el Tracklist
         // Verificamos si existe el álbum y obtenemos su ID sea objeto o string
         const albumId = actualSong.album?._id || actualSong.album;
 
         if (albumId) {
-          const albumRes = await fetch(`${API_URL}/albums/${albumId}`);
-          if (albumRes.ok) {
-            const albumData = await albumRes.json();
-            const actualAlbum = albumData.data || albumData;
+          const albumRes = await api.get(`/albums/${albumId}`);
+            const actualAlbum = albumRes.data;
             setAlbumTracks(actualAlbum.canciones || []);
-          }
         }
 
       } catch (err) {

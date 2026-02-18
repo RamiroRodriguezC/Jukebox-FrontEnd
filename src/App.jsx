@@ -9,6 +9,7 @@ import ArtistaDetail from './pages/ArtistaDetails.jsx';
 import EntityReviews from './pages/EntityReviews/EntityReviews.jsx';
 import Profile from './pages/Profile.jsx';
 import SearchPage from './pages/Search/Search.jsx';
+import Register from './pages/Register.jsx';
 import { useState } from 'react';
 import './App.css';
 
@@ -35,10 +36,11 @@ function App() {
           <Route path="/album/:id" element={<AlbumDetalle />} />
           <Route path="/cancion/:id" element={<SongDetail />} />
           <Route path="/artista/:id" element={<ArtistaDetail />} />
-          <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/" element={<Profile />} />
+          <Route path="/Usuario/:id" element={<Profile />} />
           <Route path="/reviews/:entityType/:id" element={<EntityReviews />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} /> {/* Esto pa debugear */}
 
         </Routes>

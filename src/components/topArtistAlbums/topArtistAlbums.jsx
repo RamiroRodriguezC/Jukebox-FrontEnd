@@ -3,17 +3,23 @@ import AlbumCard from '../cards/AlbumCard';
 import './topArtistAlbums.css';
 
 const TopAlbumsSection = ({albums}) => {
+  if (!albums || albums.length === 0) return null;
+
   return (
     <section className="topAlbums-section">
       <h3 className="section-title">Álbumes Destacados</h3>
-      {/* Bloque de Resumen de Rating */}
+      
+      {/* Si en 'topArtistAlbums.css' la clase 'albums-grid' tiene 
+         grid-template-columns: repeat(2, 1fr), eso es lo que rompe todo.
+         Para desktop debería ser 1 sola columna.
+      */}
       <div className="albums-grid">
           {albums.map((album) => (
-            <AlbumCard album={album} />
+            <AlbumCard key={album._id || album.id} album={album} />
           ))}
       </div>
         
-      <button className="btn-see-more">Ver todas los albunes</button>
+      <button className="btn-see-more">Ver todos los álbumes</button>
     </section>
   );
 };

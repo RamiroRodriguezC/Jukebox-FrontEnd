@@ -4,8 +4,8 @@ import SearchBar from '../../components/Search/SearchBar';
 import SearchCategoryNav from '../../components/Search/SearchCategoryNav';
 import SearchResultCard from '../../components/Search/SearchCard';
 import './Search.css';
+import api from '../../api/api.js';
 
-const API_URL = 'https://jukebox-rpt0.onrender.com'; 
 
 const SearchPage = () => {
   const [query, setQuery] = useState('');
@@ -15,9 +15,8 @@ const SearchPage = () => {
   useEffect(() => {
     const timer = setTimeout(async () => {
       if (query.length > 1) {
-        const response = await fetch(`${API_URL}/search?q=${query}&type=${category}`);
-        const data = await response.json();
-        setResults(data);
+        const response = await api.get(`/search?q=${query}&type=${category}`);
+        setResults(response.data);
       } else {
         setResults([]);
       }

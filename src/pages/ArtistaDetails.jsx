@@ -4,6 +4,7 @@ import EntityHeader from '../components/EntityHeader/EntityHeader';
 import TopAlbumsSection from '../components/TopArtistAlbums/TopArtistAlbums';
 import AboutArtistSection from '../components/AboutArtistSection/AboutArtistSection';
 import TopTracksSection from '../components/TopTracksSection/TopTracksSection';
+import api from '../api/api.js';
 
 
 const API_URL = 'https://jukebox-rpt0.onrender.com'; 
@@ -21,23 +22,15 @@ const ArtistaDetail = () => {
   useEffect(() => {
     const fetchArtista = async () => {
       try {
-        const response = await fetch(`${API_URL}/artistas/${id}`);
+        const response = await api.get(`/artistas/${id}`);
+        console.log("Respuesta del artista:", api.baseURL);
 
-        if (!response.ok) {
-          const errData = await response.json().catch(() => ({}));
-          throw new Error(errData.msg || 'Error al cargar el artista');
-        }
-
-        const albumsRes = await fetch(`${API_URL}/albums/artista/${id}`);
-        if (!albumsRes.ok) {
-          console.warn('No se pudieron cargar los álbumes del artista');
-        } 
-        const albumsData = await albumsRes.json();
-        setAlbums(albumsData.data || albumsData );
+        const albumsRes = await api.get(`/albums/artista/${id}?limit=4`);
+        setAlbums(albumsRes.data.docs || albumsRes.data);
 
 
-        const data = await response.json();
-        setArtista(data.data || data);
+        const data = response.data.data || response.data;
+        setArtista(data);
 
       } catch (err) {
         console.error("Error fetching artista:", err);
@@ -70,7 +63,7 @@ const ArtistaDetail = () => {
 
         {/* 2. GRID PRINCIPAL (Dividido en 2) */}
 
-        {/* COLUMNA IZQUIERDA: REVIEWS */}
+        {/* COLUMNA IZQUIERDA: Top albums */}
         <div className="d-content-grid">
           <TopAlbumsSection albums={albums} />
         
