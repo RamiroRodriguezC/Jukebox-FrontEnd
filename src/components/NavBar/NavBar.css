@@ -72,8 +72,59 @@
 
 /* Botón de Login con estilo de botón */
 .login-btn {
-  background-color: #6366f1;
+  background-color: #24b437;
   color: white !important;
   padding: 8px 16px;
   border-radius: 8px;
+}
+
+.logout-btn {
+  background-color: #f71010;
+  color: white !important;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+/* ── Móvil: user header en Drawer ── */
+.mobile-user-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 12px;
+}
+
+.mobile-user-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #f1f5f9;
+}
+
+.mobile-user-email {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.mobile-menu-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 8px;
+  color: #cbd5e1;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.mobile-menu-link:hover {
+  background: rgba(255,255,255,0.06);
+  color: white;
+}
+
+.mobile-user-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }

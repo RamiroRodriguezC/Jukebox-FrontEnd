@@ -15,11 +15,6 @@ const TopFiveSection = ({ title, items, type, isOwner, onEdit }) => {
           <h2 className="top-five-title">{title}</h2>
           <span className="top-five-badge">TOP 5</span>
         </div>
-        {isOwner && (
-          <button className="btn-edit-top" onClick={onEdit}>
-            Gestionar lista
-          </button>
-        )}
       </div>
 
       <div className="top-five-grid">

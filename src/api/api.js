@@ -1,9 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  // Así se accede a las variables en Vite
-  //baseURL: import.meta.env.VITE_API_URL, 
-  baseURL: 'http://localhost:4000', // Cambia esto a tu URL de desarrollo o producción
+  // Accedemos a la variable de entorno VITE_API_URL, y si no existe, usamos localhost como fallback
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:4000', 
   headers: {
     'Content-Type': 'application/json'
   }
