@@ -1,64 +1,90 @@
-/* Estructura base para todas las cartas */
+/* Cards.css */
+
+/* Contenedor principal de la Card */
 .card-base {
   background-color: #1e293b;
-  padding: 15px;
-  border-radius: 8px; /* Esquinas redoneadas */
-  transition: background-color 0.3s ease;
-  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 
-.card-base:hover {
-  background-color: #182741;
+/* Imagen de la Card */
+.card-base .ant-card-cover {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin: 0;
 }
 
-/* La imagen - Por defecto cuadrada (para Álbumes y Canciones) */
+.card-base .ant-card-cover > * {
+  width: 100% !important;
+  height: 100% !important;
+}
+
 .card-image {
   width: 100%;
-  aspect-ratio: 1 / 1; /* Esto asegura que sea un cuadrado perfecto siempre */
+  height: 100%;
   object-fit: cover;
-  border-radius: 4px;
+  display: block;
 }
 
+/* Avatar de ArtistCard */
+.artist-avatar-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: #0f172a;
+}
 
+.artist-avatar-wrapper img,
+.artist-avatar-wrapper .ant-avatar {
+  width: 120px !important;
+  height: 120px !important;
+  flex-shrink: 0;
+}
 
-/* Titulo de las cartas  */
+/* Ajuste del cuerpo de la Card (donde va el texto) */
+.card-base .ant-card-body {
+  padding: 16px;
+  background-color: #1e293b;
+  flex-grow: 1; /* Empuja el contenido para que todas las cards midan lo mismo */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Títulos y Subtítulos */
 .card-title {
-  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 700;
   color: #f8fafc;
-  margin: 0;
+  margin-bottom: 4px;
+  display: block;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
-/* Subtitulo de las cartas */
 .card-subtitle {
-    font-weight: 500;
-    color: #38bdf8;
-    display: block;
+  font-size: 0.85rem;
+  color: #38bdf8;
+  margin-bottom: 12px;
+  display: block;
 }
 
+/* Tags */
 .card-tag {
-    color: purple;
-    margin-top: 8;
+  background: rgba(192, 132, 252, 0.1);
+  color: #c084fc;
+  border: 1px solid rgba(192, 132, 252, 0.2);
+  border-radius: 4px;
+  font-weight: 600;
 }
-
-/* --- DIFERENCIAS --- */
-
-/* Clase específica para Artistas: Foto redonda */
-.artist-img {
-  border-radius: 50%;
-}
-
-/* --- RESPONSIVE --- */
-@media (max-width: 768px) {
-  .card-base {
-    padding: 10px;
-  }
-}
-
-
-
