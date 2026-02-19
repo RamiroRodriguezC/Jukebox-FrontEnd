@@ -5,38 +5,35 @@ import { AuthContext } from '../../context/AuthContext';
 import api from '../../api/api';
 import genericUser from '../../assets/genericArtist.png';
 import './UserSettings.css';
+import '../../styles/forms.css';
 
-// ── Secciones disponibles en el sidebar ──────────────────────────────────────
 const SECTIONS = [
-  { key: 'profile',  label: 'Perfil',      icon: '👤' },
-  { key: 'account',  label: 'Cuenta',       icon: '🔑' },
-  { key: 'danger',   label: 'Zona peligrosa', icon: '⚠️' },
+  { key: 'profile', label: 'Perfil',         icon: '👤' },
+  { key: 'account', label: 'Cuenta',          icon: '🔑' },
+  { key: 'danger',  label: 'Zona peligrosa',  icon: '⚠️' },
 ];
 
 const UserSettings = () => {
-  const navigate                  = useNavigate();
-  const { user, login, logout }   = useContext(AuthContext);
+  const navigate                    = useNavigate();
+  const { user, login, logout }     = useContext(AuthContext);
   const [activeSection, setSection] = useState('profile');
 
-  // ── Estado del formulario — inicializado con los datos actuales del usuario ──
   const [form, setForm] = useState({
-    username:         user?.nombre || user?.username || '',
-    mail:             user?.mail   || '',
-    bio:              user?.bio    || '',
+    username:          user?.nombre || user?.username || '',
+    mail:              user?.mail   || '',
+    bio:               user?.bio    || '',
     url_profile_photo: user?.url_profile_photo || '',
   });
 
-  // Estado para cambio de contraseña (sección "Cuenta")
   const [pwForm, setPwForm] = useState({
-    currentPassword: '',
     newPassword:     '',
     confirmPassword: '',
   });
 
   const [saving,   setSaving]   = useState(false);
-  const [feedback, setFeedback] = useState(null); // { type: 'ok'|'error', msg }
+  const [feedback, setFeedback] = useState(null);
 
-  // ── Handlers genéricos ────────────────────────────────────────────────────
+  // ── Handlers ─────────────────────────────────────────────────────────────
   const handleChange = (e) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
     setFeedback(null);
@@ -68,7 +65,7 @@ const UserSettings = () => {
     setFeedback(null);
 
     try {
-      const token = localStorage.getItem('token');
+      const token  = localStorage.getItem('token');
       const userId = user?._id || user?.id;
 
       const { data } = await api.put(
@@ -82,17 +79,15 @@ const UserSettings = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Actualizamos el contexto con los nuevos datos
-        // Mantenemos el mismo token, solo cambiamos los datos del usuario
-        const updatedUser = {
-            ...user,
-            nombre: data.username || form.username,
-            username: data.username || form.username,
-            mail: data.mail || form.mail,
-            bio: data.bio ?? user.bio,
-            url_profile_photo: data.url_profile_photo ?? form.url_profile_photo,
-        };
-        login(updatedUser, token);
+      const updatedUser = {
+        ...user,
+        nombre:            data.username          ?? form.username,
+        username:          data.username          ?? form.username,
+        mail:              data.mail              ?? form.mail,
+        bio:               data.bio               ?? user.bio,
+        url_profile_photo: data.url_profile_photo ?? form.url_profile_photo,
+      };
+      login(updatedUser, token);
 
       setFeedback({ type: 'ok', msg: '¡Cambios guardados correctamente!' });
       message.success('Perfil actualizado');
@@ -129,7 +124,7 @@ const UserSettings = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      setPwForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
+      setPwForm({ newPassword: '', confirmPassword: '' });
       setFeedback({ type: 'ok', msg: '¡Contraseña actualizada!' });
       message.success('Contraseña actualizada');
     } catch (err) {
@@ -140,13 +135,12 @@ const UserSettings = () => {
     }
   };
 
-  // ── Render de cada sección ────────────────────────────────────────────────
+  // ── Secciones ─────────────────────────────────────────────────────────────
   const renderProfile = () => (
     <div className="settings-section">
       <h2 className="section-title">Perfil público</h2>
       <p className="section-subtitle">Esta información será visible en tu página de perfil.</p>
 
-      {/* Avatar */}
       <div className="avatar-section">
         <div className="avatar-wrapper">
           <img
@@ -156,15 +150,17 @@ const UserSettings = () => {
           />
         </div>
         <div className="avatar-info">
-          <p>Pegá el URL de tu foto de perfil abajo. JPG, PNG o GIF. Máximo 5 MB.</p>
-          <button className="btn-change-avatar" onClick={() => document.getElementById('url_profile_photo').focus()}>
+          <p>Pegá el URL de tu foto de perfil abajo. JPG, PNG o GIF.</p>
+          <button
+            className="btn-change-avatar"
+            onClick={() => document.getElementById('url_profile_photo').focus()}
+          >
             Cambiar foto
           </button>
         </div>
       </div>
 
       <div className="settings-form">
-        {/* URL de foto */}
         <div className="form-group">
           <label htmlFor="url_profile_photo">URL de foto de perfil</label>
           <input
@@ -178,7 +174,6 @@ const UserSettings = () => {
           <p className="field-hint">Usá un link directo a una imagen pública.</p>
         </div>
 
-        {/* Username */}
         <div className="form-row two-cols">
           <div className="form-group">
             <label htmlFor="username">Username</label>
@@ -191,8 +186,6 @@ const UserSettings = () => {
               onChange={handleChange}
             />
           </div>
-
-          {/* Mail */}
           <div className="form-group">
             <label htmlFor="mail">Email</label>
             <input
@@ -207,7 +200,6 @@ const UserSettings = () => {
           </div>
         </div>
 
-        {/* Bio */}
         <div className="form-group">
           <label htmlFor="bio">Biografía</label>
           <textarea
@@ -221,7 +213,6 @@ const UserSettings = () => {
           />
         </div>
 
-        {/* Rol (solo lectura) */}
         <div className="form-group">
           <label>Rol</label>
           <input
@@ -232,7 +223,6 @@ const UserSettings = () => {
           <p className="field-hint">El rol no se puede modificar desde aquí.</p>
         </div>
 
-        {/* Feedback + botones */}
         <div className="form-actions">
           {feedback && (
             <span className={`save-feedback ${feedback.type === 'error' ? 'error' : ''}`}>
@@ -322,7 +312,6 @@ const UserSettings = () => {
     </div>
   );
 
-  // ── Guard: si no está logueado, redirigir ─────────────────────────────────
   if (!user) {
     navigate('/Login');
     return null;
@@ -338,8 +327,6 @@ const UserSettings = () => {
         </div>
 
         <div className="settings-layout">
-
-          {/* Sidebar */}
           <nav className="settings-sidebar">
             {SECTIONS.map(s => (
               <button
@@ -353,14 +340,13 @@ const UserSettings = () => {
             ))}
           </nav>
 
-          {/* Contenido dinámico */}
           <main>
-            {activeSection === 'profile'  && renderProfile()}
-            {activeSection === 'account'  && renderAccount()}
-            {activeSection === 'danger'   && renderDanger()}
+            {activeSection === 'profile' && renderProfile()}
+            {activeSection === 'account' && renderAccount()}
+            {activeSection === 'danger'  && renderDanger()}
           </main>
-
         </div>
+
       </div>
     </div>
   );

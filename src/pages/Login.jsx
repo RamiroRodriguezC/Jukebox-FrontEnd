@@ -44,7 +44,7 @@ const Login = () => {
           <Button block type="primary" htmlType="submit">
             Log in
           </Button>
-          or <a href="">Register now!</a>
+          or <a href="/register">Register now!</a>
         </Form.Item>
       </Form>
     </Flex>

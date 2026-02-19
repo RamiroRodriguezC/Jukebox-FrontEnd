@@ -9,7 +9,7 @@ import ArtistaDetail from './pages/ArtistaDetails.jsx';
 import EntityReviews from './pages/EntityReviews/EntityReviews.jsx';
 import Profile from './pages/Profile.jsx';
 import SearchPage from './pages/Search/Search.jsx';
-import Register from './pages/Register.jsx';
+import Register from './pages/Register/Register.jsx';
 import UserSettings from './pages/UserSettings/UserSettings.jsx';
 import './App.css';
 
