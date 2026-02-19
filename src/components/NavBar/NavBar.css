@@ -60,16 +60,6 @@
   color: white;
 }
 
-/* El input de búsqueda */
-.nav-search-input {
-  background-color: #1e293b;
-  border: 1px solid #334155;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 6px;
-  outline: none;
-}
-
 /* Botón de Login con estilo de botón */
 .login-btn {
   background-color: #24b437;

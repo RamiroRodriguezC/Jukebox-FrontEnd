@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import EntityHeader from '../components/EntityHeader/EntityHeader';
 import TopFiveSection from '../components/TopFiveSection/TopFiveSection';
 import useFetch from '../hooks/useFetch';
@@ -7,9 +8,8 @@ import './Detail.css';
 
 const Profile = () => {
   const { id } = useParams();
-
+  const { user: loggedUser } = useAuth();
   // Si no viene ID por URL, intentamos leerlo del usuario logueado en localStorage
-  const loggedUser   = JSON.parse(localStorage.getItem('user') || 'null');
   const loggedUserId = loggedUser?._id || loggedUser?.id;
   const targetId     = id || loggedUserId;
 

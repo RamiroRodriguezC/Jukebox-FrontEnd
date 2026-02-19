@@ -3,26 +3,19 @@ import { loginUser } from '../services/AuthService';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, message, Flex, Form, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext.jsx';
 
 
-const Login = ({ setUser }) => {
+const Login = () => {
+  const { login } = useAuth();
   const navigate = useNavigate(); // 2. INICIALIZAR LA FUNCIÓN
   const onFinish = async (values) => {
   try {
     const data = await loginUser(values.mail, values.password);
     
     // 1. Guardamos en disco
-    localStorage.setItem('user', JSON.stringify(data.usuario));
-    
-    // 2. Intentamos avisar a la App
-    if (typeof setUser === 'function') {
-        console.log("Enviando usuario al estado global...");
-        setUser(data.usuario); 
-    } else {
-        console.error("ERROR: setUser no es una función. Revisá cómo pasaste la prop en App.js");
-    }
-
-    navigate('/'); 
+    login(data.usuario, data.token); // Esto debería guardar el usuario y token en el contexto global y localStorage
+    navigate('/'); // 3. Redirigimos a la página principal después de iniciar sesión
   } catch (error) { 
     message.error('Error al iniciar sesión: ' + error.message);
   }

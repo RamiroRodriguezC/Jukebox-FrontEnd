@@ -2,21 +2,20 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { message, Drawer, Button, Grid } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
+import { useAuth } from '../../context/AuthContext';
 import NavItems from './NavItems'; 
-
 import './Navbar.css';
 import logo from '../../assets/logo.webp';
 
 const { useBreakpoint } = Grid;
 
-const Navbar = ({ user, setUser }) => {
+const Navbar = () => {
+   const { user, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const screens = useBreakpoint();
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    setUser(null);
+    logout();
     setMobileMenuOpen(false);
     message.success('Sesión cerrada');
   };

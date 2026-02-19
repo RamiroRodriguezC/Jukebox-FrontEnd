@@ -10,29 +10,23 @@ import EntityReviews from './pages/EntityReviews/EntityReviews.jsx';
 import Profile from './pages/Profile.jsx';
 import SearchPage from './pages/Search/Search.jsx';
 import Register from './pages/Register.jsx';
-import { useState } from 'react';
+import UserSettings from './pages/UserSettings/UserSettings.jsx';
 import './App.css';
 
 const NotFound = () => <div style={{color: 'white', padding: '100px'}}>Esta ruta no existe (404)</div>;
 
 function App() {
-  const [user, setUser] = useState(() => {
-  const savedUser = localStorage.getItem('user');
-  
-  // Si hay un usuario guardado en localStorage, lo parseamos y lo usamos como estado inicial
-  return savedUser ? JSON.parse(savedUser) : null;
-});
   return (
     <Router>
       {/* El Navbar va FUERA de Routes para que sea visible en todas las páginas */}
-      <Navbar user={user} setUser={setUser} />
+      <Navbar/>
 
       {/* El contenedor del contenido dinámico. Mientras el navbar se queda, este es el que "cambia" de pagina */}
       <main className="main-content">
         <Routes>
           {/* Esto es lo que mostrara el contenedor segun la URL */}
           <Route path="/" element={<Test />} />
-          <Route path="/Login" element={<Login setUser={setUser}/>} />
+          <Route path="/Login" element={<Login />} />
           <Route path="/album/:id" element={<AlbumDetalle />} />
           <Route path="/cancion/:id" element={<SongDetail />} />
           <Route path="/artista/:id" element={<ArtistaDetail />} />
@@ -41,6 +35,8 @@ function App() {
           <Route path="/reviews/:entityType/:id" element={<EntityReviews />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/profile/settings" element={<UserSettings />} />
+          <Route path="/test" element={<Test />} /> {/* Esto pa debugear */}
           <Route path="*" element={<NotFound />} /> {/* Esto pa debugear */}
 
         </Routes>

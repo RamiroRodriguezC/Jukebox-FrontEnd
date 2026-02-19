@@ -1,5 +1,5 @@
 // El context es una forma de compartir datos entre componentes sin tener que pasar props manualmente en cada nivel.
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useContext } from 'react';
 
 // Creamos el "Contexto". 
 // Los componentes que quieran "oír" los datos del usuario se "sintonizarán" aquí.
@@ -8,10 +8,8 @@ export const AuthContext = createContext();
 // El provider es el canal que provee los datos (context) a los componentes hijos.
 // children es todo lo que esté dentro del AuthProvider en el árbol de componentes.
 export const AuthProvider = ({ children }) => {
-  
   // Estado para guardar el objeto del usuario (nombre, mail, rol, etc.)
   const [user, setUser] = useState(null);
-  
   // Estado para saber si la app está verificando si ya había una sesión iniciada.
   // Evita que la app se muestre "vacía" un segundo antes de cargar al usuario.
   const [loading, setLoading] = useState(true);
@@ -58,3 +56,6 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+// Este hook es una forma fácil de "sintonizar" los componentes con el contexto de autenticación.
+// En vez de importar useContext y AuthContext en cada componente, solo importan este hook.
+export const useAuth = () => useContext(AuthContext);
