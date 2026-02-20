@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star } from 'lucide-react'; // Cambiamos a lucide-react para mantener consistencia
+import { Star, Heart } from 'lucide-react'; // Cambiamos a lucide-react para mantener consistencia
 import './ReviewCard.css'; // Corregimos el nombre del archivo CSS
 const ReviewCard = ({ review }) => {
     return (
@@ -13,10 +13,16 @@ const ReviewCard = ({ review }) => {
                     />
                     <span className="reviewer-name">{review.autor.username}</span>
                 </div>
-                <div className="review-stars">
-                    {[...Array(5)].map((_, i) => (
-                        <Star key={i} size={12} className={i < review.rating ? 'star-filled' : 'text-gray-600'} />
-                    ))}
+                <div className = "reviewer-info">
+                    <div >
+                        <Heart size={12} className={review.like ? 'heart-filled' : 'text-gray-600'} />
+                    </div>
+                    <div className="review-stars">
+                        {[...Array(5)].map((_, i) => (
+                            <Star key={i} size={12} className={i < review.rating ? 'star-filled' : 'text-gray-600'} />
+                        ))}
+                </div>
+                    
                 </div>
             </div>
             <p className="review-text">"{review.comentario}"</p>

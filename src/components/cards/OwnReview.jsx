@@ -112,7 +112,8 @@ const OwnReview = ({ userId, entityId, entityType, ownReview, onReviewChange }) 
     } finally { setDeleting(false); }
   };
 
-  if (!ownReview) return (
+  if (!ownReview) // Si no hay review propia, mostramos el botón para crear una
+    return (
     <>
       <button className="btn-write-review" onClick={() => setModal(true)}>
         ✏️ Escribir reseña
@@ -120,7 +121,7 @@ const OwnReview = ({ userId, entityId, entityType, ownReview, onReviewChange }) 
       <ReviewModal open={modal} onClose={closeModal} onSubmit={handleCreate} saving={saving} existing={null} />
     </>
   );
-
+   // Si hay review propia, mostramos la review con opciones de editar/eliminar
   return (
     <>
       <div className="own-review-card">

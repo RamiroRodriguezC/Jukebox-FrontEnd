@@ -16,7 +16,8 @@ const ReviewSection = ({
 
   const userId    = user?._id || user?.id;
   const ownReview = user ? reviews.find(r => r.autor?._id === userId) : null;
-
+console.log('reviews del array:', reviews.map(r => ({ id: r._id, autor: r.autor?.username })));
+console.log('ownReview._id:', ownReview?._id);
   const handleReviewChange = (action, review) => {
     if (action === 'create') setReviews(prev => [review, ...prev]);
     if (action === 'edit')   setReviews(prev => prev.map(r => r._id === review._id ? review : r));

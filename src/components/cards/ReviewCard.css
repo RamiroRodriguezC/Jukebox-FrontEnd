@@ -45,3 +45,8 @@
   color: #d1d5db;
   line-height: 1.4;
 }
+
+.heart-filled { 
+  color: rgba(255, 64, 245, 0.83); 
+  fill: rgba(255, 64, 245, 0.62); 
+}
