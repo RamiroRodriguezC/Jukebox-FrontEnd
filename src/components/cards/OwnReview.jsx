@@ -4,6 +4,7 @@ import { message } from 'antd';
 import ReviewCard from './ReviewCard';
 import api from '../../api/api';
 import './ReviewCard.css';
+import './OwnReview.css';
 
 const ReviewModal = ({ open, onClose, onSubmit, saving, existing }) => {
   const [form, setForm] = useState({
