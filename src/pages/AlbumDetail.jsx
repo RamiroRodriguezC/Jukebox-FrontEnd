@@ -9,17 +9,17 @@ import './Detail.css';
 const AlbumDetail = () => {
   const { id } = useParams();
 
-  const { data: album,       loading,      error        } = useFetch(`/albums/${id}`, [id]);
-  const { data: reviewsData, loading: loadingReviews    } = useFetch(`/reviews/Album/${id}?limit=3`, [id]);
+  const { data: album, loading, error } = useFetch(`/albums/${id}`, [id]);
+  const { data: reviewsData, loading: loadingReviews } = useFetch(`/reviews/Album/${id}?limit=3`, [id]);
 
   const reviews    = reviewsData?.docs || [];
   const coverImage = album?.url_portada || `https://placehold.co/400x400/222/fff?text=${album?.titulo || 'Album'}`;
   const artistName = album?.autores?.map(a => a.nombre).join(', ') || 'Artista Desconocido';
   const rating     = album?.promedioRating || 0;
 
-  if (loading)        return <div className="loading-screen">Cargando...</div>;
-  if (error)          return <div className="loading-screen" style={{ color: '#ef4444' }}>{error}</div>;
-  if (!album)         return null;
+  if (loading || loadingReviews) return <div className="loading-screen">Cargando...</div>;
+  if (error)  return <div className="loading-screen" style={{ color: '#ef4444' }}>{error}</div>;
+  if (!album) return null;
 
   return (
     <div className="detail-container">

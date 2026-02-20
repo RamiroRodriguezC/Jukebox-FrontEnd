@@ -17,12 +17,11 @@ const SongDetail = () => {
   const { id } = useParams();
 
   const { data: cancion, loading, error } = useFetch(`/canciones/${id}`, [id]);
+  const { data: reviewsData, loading: loadingReviews } = useFetch(`/reviews/Cancion/${id}?limit=3`, [id]);
 
-  // El ID del álbum puede venir como objeto embebido o como string simple
+  // Album fetch separado — depende del id de cancion, no bloquea reviews
   const albumId = cancion?.album?._id || cancion?.album;
-
-  const { data: reviewsData } = useFetch(`/reviews/Cancion/${id}?limit=3`, [id]);
-  const { data: album        } = useFetch(albumId ? `/albums/${albumId}` : null, [albumId]);
+  const { data: album } = useFetch(albumId ? `/albums/${albumId}` : null, [albumId]);
 
   const reviews    = reviewsData?.docs || [];
   const albumTracks = album?.canciones || [];
@@ -33,6 +32,9 @@ const SongDetail = () => {
   if (loading) return <div className="loading-screen">Cargando...</div>;
   if (error)   return <div className="loading-screen" style={{ color: '#ef4444' }}>{error}</div>;
   if (!cancion) return null;
+
+  // Esperamos las reviews antes de montar ReviewSection para que initialReviews sea el valor final
+  if (loadingReviews) return <div className="loading-screen">Cargando...</div>;
 
   return (
     <div className="detail-container">
@@ -51,7 +53,7 @@ const SongDetail = () => {
           <div>
             <ReviewSection
               rating={rating}
-              totalReviews={cancion.cantReseñas || 0} 
+              totalReviews={cancion.cantReseñas || 0}
               reviews={reviews}
               emptyMessage="Aún no hay reseñas para esta canción."
               entityId={id}

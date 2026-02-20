@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import ProfileSection from './sections/ProfileSection';
 import AccountSection from './sections/AccountSection';
+import FavoritesSection from './sections/FavoritesSection';
 import DangerSection  from './sections/DangerSection';
 import './UserSettings.css';
 
 const SECTIONS = [
   { key: 'profile', label: 'Perfil',        icon: '👤' },
   { key: 'account', label: 'Cuenta',         icon: '🔑' },
+  { key: 'Favs',  label: 'Favoritos', icon: '⚠️' },
   { key: 'danger',  label: 'Zona peligrosa', icon: '⚠️' },
 ];
 
@@ -45,6 +47,7 @@ const UserSettings = () => {
           <main>
             {activeSection === 'profile' && <ProfileSection />}
             {activeSection === 'account' && <AccountSection />}
+            {activeSection === 'Favs'  && <FavoritesSection />}
             {activeSection === 'danger'  && <DangerSection />}
           </main>
         </div>
