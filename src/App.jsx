@@ -11,9 +11,9 @@ import Profile from './pages/Profile.jsx';
 import SearchPage from './pages/Search/Search.jsx';
 import Register from './pages/Register/Register.jsx';
 import UserSettings from './pages/UserSettings/UserSettings.jsx';
+import NotFound from './pages/NotFound.jsx';
+import Home from './pages/Home.jsx';
 import './App.css';
-
-const NotFound = () => <div style={{color: 'white', padding: '100px'}}>Esta ruta no existe (404)</div>;
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
       <main className="main-content">
         <Routes>
           {/* Esto es lo que mostrara el contenedor segun la URL */}
-          <Route path="/" element={<Test />} />
+          <Route path="/" element={<Home />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/album/:id" element={<AlbumDetalle />} />
           <Route path="/cancion/:id" element={<SongDetail />} />
