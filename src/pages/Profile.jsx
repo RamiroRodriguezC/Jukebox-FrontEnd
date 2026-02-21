@@ -4,6 +4,9 @@ import { useAuth } from '../context/AuthContext';
 import EntityHeader from '../components/EntityHeader/EntityHeader';
 import TopFiveSection from '../components/TopFiveSection/TopFiveSection';
 import useFetch from '../hooks/useFetch';
+import { deleteUser } from '../services/DeleteUserService';
+import { useNavigate } from 'react-router-dom';
+
 import './Detail.css';
 
 const Profile = () => {
@@ -12,6 +15,7 @@ const Profile = () => {
   // Si no viene ID por URL, intentamos leerlo del usuario logueado en localStorage
   const loggedUserId = loggedUser?._id || loggedUser?.id;
   const targetId     = id || loggedUserId;
+  const navigate = useNavigate();
 
   const { data: usuario, loading, error } = useFetch(
     targetId ? `/usuarios/${targetId}` : null,
@@ -26,10 +30,27 @@ const Profile = () => {
   if (error)     return <div className="loading-screen" style={{ color: '#ef4444' }}>{error}</div>;
   if (!usuario)  return null;
 
+  // VARIABLES PARA FUNCIONES DE ADMIN
+  const isAdmin = loggedUser?.rol === 'admin';
+  const isOwnProfile = String(loggedUser?._id || loggedUser?.id) === String(targetId);
+
+  // Mostrar el botón solo si sos admin Y estás viendo el perfil de OTRO
+  const canDelete = isAdmin && !isOwnProfile;
+  //Funcion que se ejecuta al hacer click en el boton de eliminar usuario. Pide confirmacion y luego llama a la API para eliminarlo. Si es exitoso, redirige al home.
+  
+  const handleDeleteUser = () => {
+  if (!window.confirm(`¿Seguro que querés eliminar la cuenta de ${usuario.username}?`)) return;
+    deleteUser(targetId, { onSuccess: () => navigate('/') });
+  };
+
   return (
     <div className="detail-container">
       <div className="d-main-content">
-
+        {canDelete && (
+          <button className="btn-danger" onClick={handleDeleteUser} style={{ marginLeft: 'auto', display: 'block' }}>
+            🗑️ Eliminar cuenta
+          </button>
+        )}
         <EntityHeader
           type="User"
           title={usuario.username}
