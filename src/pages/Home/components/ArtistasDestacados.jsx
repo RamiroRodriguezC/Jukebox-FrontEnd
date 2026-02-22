@@ -26,7 +26,7 @@ const ArtistasDestacados = () => {
       <Row gutter={[16, 16]}>
         {artistas.map(artista => (
           <Col key={artista._id} xs={12} sm={8} md={6} lg={4}>
-            <Link to={`/artistas/${artista._id}`} style={{ textDecoration: 'none' }}>
+            <Link to={`/artista/${artista._id}`} style={{ textDecoration: 'none' }}>
                 <ArtistCard artista={artista} />
           </Link>
           </Col>
