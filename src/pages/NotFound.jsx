@@ -1,3 +1,5 @@
+import rockyImg from '../assets/Rocky/404NotFound.png';
+
 const NotFound = () => {
   return (
     <div 
@@ -12,7 +14,7 @@ const NotFound = () => {
       }}
     >
       <img 
-        src="./Rocky/404NotFound.png" 
+        src={rockyImg}
         alt="404 Not Found" 
         style={{ maxWidth: '400px', height: 'auto' }} 
       />

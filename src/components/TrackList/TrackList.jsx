@@ -1,5 +1,6 @@
 import React from 'react';
 import './TrackList.css';
+import { Link } from 'react-router-dom';
 
 const TrackList = ({ canciones = [], currentTrackId }) => {
 
@@ -19,11 +20,13 @@ const TrackList = ({ canciones = [], currentTrackId }) => {
       <div className="track-list-container">
         {canciones && canciones.length > 0 ? (
           canciones.map((cancion, index) => (
-            <div key={cancion._id || index} className={`track-row ${currentTrackId === cancion._id ? 'active-track' : ''}`}>
-              <div className="track-num">{index + 1}</div>
-              <div className="track-name">{cancion.titulo}</div>
-              <div className="track-dur">{formatDuration(cancion.duracion)}</div>
-            </div>
+            <Link key={cancion._id || index} to={`/cancion/${cancion._id}`}>
+              <div className={`track-row ${currentTrackId === cancion._id ? 'active-track' : ''}`}>
+                <div className="track-num">{index + 1}</div>
+                <div className="track-name">{cancion.titulo}</div>
+                <div className="track-dur">{formatDuration(cancion.duracion)}</div>
+              </div>
+            </Link>
           ))
         ) : (
           <p className="tracklist-empty">Sin canciones registradas.</p>

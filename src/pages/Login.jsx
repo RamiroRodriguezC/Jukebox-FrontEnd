@@ -15,9 +15,10 @@ const Login = () => {
     
     // 1. Guardamos en disco
     login(data.usuario, data.token); // Esto debería guardar el usuario y token en el contexto global y localStorage
+    console.log('Login exitoso:', data);
     navigate('/'); // 3. Redirigimos a la página principal después de iniciar sesión
   } catch (error) { 
-    message.error('Error al iniciar sesión: ' + error.message);
+    message.error('Error al iniciar sesión: ' + (error?.message || error || 'Error desconocido'));
   }
 };
   return (

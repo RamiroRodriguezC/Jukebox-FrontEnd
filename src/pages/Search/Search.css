@@ -1,78 +1,83 @@
-/* Search.css */
-
-/* Contenedor principal de la página */
+/* ─── SEARCH PAGE ─── */
 .search-page-container {
   max-width: 900px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 2rem 1.5rem;
   min-height: 100vh;
 }
 
-/* --- BARRA DE BÚSQUEDA --- */
+/* ─── BARRA DE BÚSQUEDA ─── */
 .search-bar-container {
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
+  position: relative;
 }
 
 .search-input {
   width: 100%;
   padding: 14px 20px;
   font-size: 1rem;
-  border-radius: 500px; /* Estilo píldora */
-  border: none;
-  background-color: #242424;
-  color: white;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: #f1f5f9;
   outline: none;
-  transition: background-color 0.3s;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  font-family: inherit;
 }
 
 .search-input:focus {
-  background-color: #2a2a2a;
-  box-shadow: 0 0 0 1px #555;
+  border-color: #c084fc;
+  background: rgba(192, 132, 252, 0.05);
+  box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.12);
 }
 
-/* --- NAVEGACIÓN DE CATEGORÍAS --- */
+.search-input::placeholder {
+  color: #475569;
+}
+
+/* ─── NAVEGACIÓN DE CATEGORÍAS ─── */
 .search-nav {
   display: flex;
-  gap: 10px;
-  margin-bottom: 30px;
+  gap: 8px;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
 }
 
-/* Estilo base del botón */
 .search-nav-item {
-  padding: 8px 16px;
-  background: #2a2a2a; /* Color oscuro de tu UI */
-  color: #ccc;
-  border: 1px solid transparent;
-  border-radius: 20px;
+  padding: 7px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #64748b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50px;
   cursor: pointer;
-  outline: none; /* Quitamos el borde molesto que se va al hacer clic fuera */
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: inherit;
   transition: all 0.2s ease;
 }
 
-/* El estado cuando la categoría está seleccionada */
-.search-nav-item.active {
-  border: 1px solid white; /* Este borde NO se irá al tocar el buscador */
-  color: white;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-/* Opcional: un efecto suave al pasar el mouse */
 .search-nav-item:hover {
-  background: #333;
+  background: rgba(255, 255, 255, 0.07);
+  color: #cbd5e1;
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
+.search-nav-item.active {
+  background: rgba(192, 132, 252, 0.12);
+  color: #c084fc;
+  border-color: rgba(192, 132, 252, 0.35);
+  font-weight: 600;
+}
 
-
-/* --- LISTA Y TARJETAS --- */
+/* ─── LISTA DE RESULTADOS ─── */
 .results-list {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 
-/* El Link que envuelve la tarjeta */
-.results-list a {
+.search-result-link {
   text-decoration: none;
   color: inherit;
   display: block;
@@ -81,26 +86,30 @@
 .search-result-card {
   display: flex;
   align-items: center;
-  padding: 8px 12px;
-  border-radius: 6px;
-  gap: 15px;
-  transition: background 0.3s;
+  padding: 10px 12px;
+  border-radius: 10px;
+  gap: 14px;
+  border: 1px solid transparent;
+  transition: background 0.15s, border-color 0.15s;
 }
 
 .search-result-card:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.06);
 }
 
 .card-image {
-  width: 55px;
-  height: 55px;
+  width: 48px;
+  height: 48px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* Estilo circular para Artistas y Usuarios */
-.search-result-card[data-type="artista"] .card-image,
-.search-result-card[data-type="usuario"] .card-image {
+/* Circular para Artistas y Usuarios */
+.search-result-card[data-type="Artista"] .card-image,
+.search-result-card[data-type="Usuario"] .card-image {
   border-radius: 50%;
 }
 
@@ -108,18 +117,41 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 2px;
+  min-width: 0;
 }
 
 .card-title {
   margin: 0;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card-subtitle {
-  margin: 3px 0 0 0;
-  font-size: 0.85rem;
-  color: #b3b3b3;
+  margin: 0;
+  font-size: 0.8rem;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+/* ─── RESPONSIVE ─── */
+@media (max-width: 640px) {
+  .search-page-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .search-nav {
+    gap: 6px;
+  }
+
+  .search-nav-item {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}

@@ -12,7 +12,7 @@ import SearchPage from './pages/Search/Search.jsx';
 import Register from './pages/Register/Register.jsx';
 import UserSettings from './pages/UserSettings/UserSettings.jsx';
 import NotFound from './pages/NotFound.jsx';
-import Home from './pages/Home.jsx';
+import Home from './pages/Home/Home.jsx';
 import './App.css';
 
 function App() {
