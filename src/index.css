@@ -103,3 +103,7 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.ant-spin-dot-item {
+  background-color: var(--accent-color) !important;
+}

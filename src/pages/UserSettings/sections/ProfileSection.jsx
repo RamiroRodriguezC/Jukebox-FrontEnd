@@ -3,7 +3,7 @@ import { message } from 'antd';
 import { AuthContext } from '../../../context/AuthContext';
 import api from '../../../api/api';
 import genericUser from '../../../assets/genericArtist.png';
-import '../../../styles/Ui.css';
+import '../../../styles/Ui.csss';
 
 const getInitialForm = (user) => ({
   username:          user?.nombre || user?.username || '',

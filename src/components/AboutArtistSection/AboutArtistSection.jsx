@@ -1,6 +1,6 @@
 import React from 'react';
 import './AboutArtistSection.css';
-import '../../styles/ui.css';
+import '../../styles/Ui.csss';
 
 const AboutArtistSection = ({artista}) => {
   return (

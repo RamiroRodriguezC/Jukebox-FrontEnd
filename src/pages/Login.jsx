@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/AuthService';
 import { useAuth } from '../context/AuthContext.jsx';
-import '../styles/ui.css';
+import '../styles/Ui.csss';
 import './Login.css';
 
 const Login = () => {

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import api from '../../api/api.js';
 import './Register.css';
-import '../../styles/Ui.css';
+import '../../styles/Ui.csss';
 
 const Register = () => {
   const [formData, setFormData] = useState({
