@@ -12,7 +12,7 @@ const TrackCard = ({ cancion }) => {
       className="card-base"
       cover={
         <img 
-          src={cancion.album.url_portada || genericAlbum} 
+          src={cancion.album?.url_portada || genericAlbum} 
           alt="Portada" 
           className="card-image"
         />
