@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import ReviewSection from '../components/ReviewSection2/ReviewSection';
+import ReviewSection from '../components/ReviewSection/ReviewSection';
 import EntityHeader from '../components/EntityHeader/EntityHeader';
 import TrackList from '../components/TrackList/TrackList';
 import useFetch from '../hooks/useFetch';
