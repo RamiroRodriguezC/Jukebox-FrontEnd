@@ -33,7 +33,7 @@ const TopFiveSection = ({ title, items, type, isOwner, onEdit }) => {
                 {type === 'album' ? (
                   <AlbumCard album={objetoReal} />
                 ) : (
-                  <SongCard song={objetoReal} />
+                  <TrackCard cancion={objetoReal} />
                 )}
               </div>
             );
