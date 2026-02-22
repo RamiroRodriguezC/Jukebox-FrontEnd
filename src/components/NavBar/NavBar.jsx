@@ -5,7 +5,7 @@ import { MenuOutlined } from '@ant-design/icons';
 import { useAuth } from '../../context/AuthContext';
 import NavItems from './NavItems'; 
 import './NavBar.css';
-import logo from '../../assets/logo.webp';
+import logo from '../../assets/Logo.webp';
 
 const { useBreakpoint } = Grid;
 
