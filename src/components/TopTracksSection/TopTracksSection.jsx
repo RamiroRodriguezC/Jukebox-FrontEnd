@@ -1,5 +1,5 @@
 import React from 'react';
-import './topTracksSection.css';
+import './TopTracksSection.css';
 
 const TopTracksSection = () => {
   return (

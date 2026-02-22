@@ -35,7 +35,6 @@ function App() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile/settings" element={<UserSettings />} />
-          <Route path="/test" element={<Test />} /> {/* Esto pa debugear */}
           <Route path="*" element={<NotFound />} /> {/* Esto pa debugear */}
 
         </Routes>

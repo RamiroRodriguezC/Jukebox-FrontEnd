@@ -4,7 +4,7 @@ import { message, Drawer, Button, Grid } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 import { useAuth } from '../../context/AuthContext';
 import NavItems from './NavItems'; 
-import './Navbar.css';
+import './NavBar.css';
 import logo from '../../assets/logo.webp';
 
 const { useBreakpoint } = Grid;
