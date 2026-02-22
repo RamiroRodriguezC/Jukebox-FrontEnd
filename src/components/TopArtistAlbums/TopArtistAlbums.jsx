@@ -1,6 +1,6 @@
 import React from 'react';
 import AlbumCard from '../cards/AlbumCard';
-import './topArtistAlbums.css';
+import './TopArtistAlbums.css';
 
 const TopAlbumsSection = ({albums}) => {
   if (!albums || albums.length === 0) return null;
