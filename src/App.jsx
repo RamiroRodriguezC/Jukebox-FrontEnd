@@ -5,7 +5,7 @@ import Login from './pages/Login.jsx';
 import AlbumDetalle from './pages/AlbumDetail.jsx';
 import SongDetail from './pages/SongDetail.jsx';
 import ArtistaDetail from './pages/ArtistaDetails.jsx';
-import EntityReviews from './pages/EntityReviews/EntityReviews.jsx';
+import EntityReviews from './pages//EntityReviews.jsx';
 import Profile from './pages/Profile.jsx';
 import SearchPage from './pages/Search/Search.jsx';
 import Register from './pages/Register/Register.jsx';

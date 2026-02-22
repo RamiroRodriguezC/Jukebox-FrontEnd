@@ -1,22 +1,11 @@
-/* --- PALETA DE COLORES (Cool Vibe: Azul/Morado/Rosa) --- */
-:root {
-  /* Color de Acento Principal (Violeta/Morado Vibrante) */
-  --accent-color: #c084fc; /* Purple-400 */
-  --accent-hover: #a855f7; /* Purple-500 */
-  
-  --primary-text: #ffffff;
-  --secondary-text: #a1a1aa; /* Zinc-400 */
-  --bg-dark: #09090b; /* Zinc-950 */
-  --bg-card: rgba(255, 255, 255, 0.03);
-  --border-color: rgba(255, 255, 255, 0.08);
-  /* Tinte sutil morado para los hovers */
-  --hover-row: rgba(192, 132, 252, 0.1); 
-}
+/* Detail.css
+   Estilos para AlbumDetail, SongDetail, ArtistaDetail y EntityReviews.
+   Las variables CSS (--accent-color, etc.) vienen de index.css
+*/
 
 .detail-container {
   min-height: 100vh;
-  /* Degradado de fondo más FRÍO (Azul oscuro a Negro) */
-  background: linear-gradient(to bottom, #0f172a 0%, #000000 100%); 
+  background: linear-gradient(to bottom, #0f172a 0%, #000000 100%);
   color: var(--primary-text);
   font-family: system-ui, -apple-system, sans-serif;
   padding-bottom: 5rem;
@@ -37,16 +26,11 @@
   }
 }
 
-/* --- NAVBAR --- */
-.d-nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 1rem 2rem;
-  border-bottom: 1px solid var(--border-color);
+/* --- CONTENIDO --- */
+.d-main-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .d-back-link {
@@ -62,15 +46,36 @@
 
 .d-back-link:hover { color: var(--accent-color); }
 
-/* --- CONTENIDO --- */
-.d-main-content {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 2rem;
+/* --- ENTITY REVIEWS --- */
+.reviews-header {
+  margin-bottom: 30px;
 }
 
+.reviews-header h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(to right, #fff, #888);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
+@media (max-width: 768px) {
+  .reviews-header h2 {
+    font-size: 1.8rem;
+  }
+}
 
+/* --- LOADING / ERROR --- */
+.loading-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-color);
+}
+
+/* --- SPINNER --- */
 .d-spinner {
   width: 3rem;
   height: 3rem;
@@ -80,13 +85,5 @@
   animation: ad-spin 1s linear infinite;
   margin-right: 1rem;
 }
-@keyframes ad-spin { to { transform: rotate(360deg); } }
 
-/* Loading/Error */
-.loading-screen {
-  min-height: 100vh; /* Corrección aquí */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent-color);
-}
+@keyframes ad-spin { to { transform: rotate(360deg); } }

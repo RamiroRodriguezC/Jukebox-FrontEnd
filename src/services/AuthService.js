@@ -1,4 +1,3 @@
-import axios from 'axios';
 import api from '../api/api.js';
 
 export const loginUser = async (mail, password) => {

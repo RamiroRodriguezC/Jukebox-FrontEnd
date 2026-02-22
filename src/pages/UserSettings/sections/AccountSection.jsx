@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { message } from 'antd';
 import { AuthContext } from '../../../context/AuthContext';
 import api from '../../../api/api';
-import '../../../styles/forms.css';
+import '../../../styles/Ui.css';
 
 const AccountSection = () => {
   const { user }              = useContext(AuthContext);

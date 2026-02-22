@@ -1,7 +1,6 @@
-/* ─────────────────────────────────────────────
-   UserSettings.css — Estilos específicos de la página de configuración
-   Clases de formulario: ver src/styles/forms.css
-───────────────────────────────────────────── */
+/* UserSettings.css
+   btn-danger, btn-change-avatar, btn-cancel, btn-save → vienen de forms.css
+*/
 
 .settings-page {
   min-height: 100vh;
@@ -16,7 +15,6 @@
   padding: 2rem 1.5rem;
 }
 
-/* Encabezado */
 .settings-header {
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
@@ -37,7 +35,6 @@
   margin: 0;
 }
 
-/* Layout de dos columnas */
 .settings-layout {
   display: grid;
   grid-template-columns: 1fr;
@@ -51,7 +48,7 @@
   }
 }
 
-/* Sidebar de navegación */
+/* Sidebar */
 .settings-sidebar {
   display: flex;
   flex-direction: row;
@@ -105,7 +102,7 @@
   flex-shrink: 0;
 }
 
-/* Card de cada sección */
+/* Card de sección */
 .settings-section {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -158,24 +155,7 @@
   line-height: 1.4;
 }
 
-.btn-change-avatar {
-  padding: 7px 16px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: transparent;
-  color: #e2e8f0;
-  font-size: 0.85rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-change-avatar:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.25);
-}
-
-/* Sección de contraseña */
+/* Sección contraseña */
 .password-section {
   margin-top: 2rem;
   padding-top: 2rem;
@@ -207,20 +187,4 @@
   font-size: 0.85rem;
   color: #64748b;
   margin: 0 0 1rem 0;
-}
-
-.btn-danger {
-  padding: 8px 20px;
-  border-radius: 8px;
-  border: 1px solid rgba(239, 68, 68, 0.4);
-  background: transparent;
-  color: #ef4444;
-  font-size: 0.85rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-danger:hover {
-  background: rgba(239, 68, 68, 0.1);
 }

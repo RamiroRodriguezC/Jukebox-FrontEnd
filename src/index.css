@@ -1,12 +1,36 @@
 /* src/index.css */
+
+/* ─── VARIABLES GLOBALES ─────────────────────────────────
+   Definidas acá para que estén disponibles en TODA la app,
+   sin importar qué página se cargue primero.
+──────────────────────────────────────────────────────── */
+:root {
+  /* Acento principal */
+  --accent-color:   #c084fc; /* Purple-400 */
+  --accent-hover:   #a855f7; /* Purple-500 */
+
+  /* Texto */
+  --primary-text:   #ffffff;
+  --secondary-text: #a1a1aa; /* Zinc-400 */
+
+  /* Fondos */
+  --bg-dark:        #09090b; /* Zinc-950 */
+  --bg-card:        rgba(255, 255, 255, 0.03);
+
+  /* Bordes */
+  --border-color:   rgba(255, 255, 255, 0.08);
+
+  /* Hover con tinte morado */
+  --hover-row:      rgba(192, 132, 252, 0.1);
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  /* Usamos tu paleta de azul noche */
   color: #f8fafc;
-  background-color: #0f172a; 
+  background-color: #0f172a;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

@@ -1,10 +1,10 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import ProfileSection from '../Register/sections/ProfileSection';
-import AccountSection from '../Register/sections/AccountSection';
-import FavoritesSection from '../Register/sections/FavoritesSection';
-import DangerSection  from '../Register/sections/DangerSection';
+import ProfileSection from './sections/ProfileSection';
+import AccountSection from './sections/AccountSection';
+import FavoritesSection from './sections/FavoritesSection';
+import DangerSection  from './sections/DangerSection';
 import './UserSettings.css';
 
 const SECTIONS = [

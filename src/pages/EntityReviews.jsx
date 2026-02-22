@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import ReviewsScroll from '../../components/ReviewsScroll/ReviewsScroll';
-import api from '../../api/api.js';
-import './EntityReviews.css';
+import ReviewsScroll from '../components/ReviewsScroll/ReviewsScroll.jsx';
+import api from '../api/api.js';
+import './Detail.css'; // antes: './EntityReviews.css'
 
 const EntityReviews = () => {
   const { id, entityType } = useParams();
@@ -30,17 +30,19 @@ const EntityReviews = () => {
   }, [id, entityType]);
 
   if (loading) return <div className="loading-screen">Cargando...</div>;
-  if (error) return <div className="loading-screen" style={{ color: '#ef4444' }}>{error}</div>;
+  if (error)   return <div className="loading-screen" style={{ color: '#ef4444' }}>{error}</div>;
 
   return (
     <div className="detail-container">
-      <div>
-        <h2>Reseñas de {nombre}</h2>
+      <div className="d-main-content">
+        <div className="reviews-header">
+          <h2>Reseñas de {nombre}</h2>
+        </div>
+        <ReviewsScroll
+          reviews={reviews}
+          title={`Explora las opiniones de ${nombre}`}
+        />
       </div>
-      <ReviewsScroll
-        reviews={reviews}
-        title={`Explora las opiniones de ${nombre}`}
-      />
     </div>
   );
 };
