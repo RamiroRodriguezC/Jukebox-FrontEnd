@@ -1,6 +1,6 @@
 import React from 'react';
 import AlbumCard from '../cards/AlbumCard';
-import SongCard from '../cards/TrackCard';
+import TrackCard from '../cards/TrackCard';
 import './TopFiveSection.css';
 
 const TopFiveSection = ({ title, items, type, isOwner, onEdit }) => {
