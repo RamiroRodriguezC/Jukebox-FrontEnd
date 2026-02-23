@@ -50,3 +50,27 @@
   color: rgba(255, 64, 245, 0.83); 
   fill: rgba(255, 64, 245, 0.62); 
 }
+
+/* ── Botón eliminar admin ── */
+.review-delete-btn {
+  background: transparent;
+  border: none;
+  color: #475569;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s, background 0.2s;
+  line-height: 0;
+}
+
+.review-delete-btn:hover:not(:disabled) {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.1);
+}
+
+.review-delete-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

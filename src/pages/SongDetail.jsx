@@ -43,7 +43,7 @@ const SongDetail = () => {
         <EntityHeader
           type="Canción"
           title={cancion.titulo}
-          subtitle={<p className="d-artist">{artistName}</p>}
+          authors={cancion.autores}
           image={coverImage}
           meta={`${cancion.generos?.join(', ')} • ${formatDuration(cancion.duracion)}`}
           variant="square"

@@ -50,7 +50,7 @@ console.log('ownReview._id:', ownReview?._id);
       <div className="review-list">
         {reviews.filter(r => r._id !== ownReview?._id).length > 0 ? (
           reviews.filter(r => r._id !== ownReview?._id).map(review => (
-            <ReviewCard key={review._id} review={review} />
+            <ReviewCard key={review._id} review={review} onDelete={(id) => handleReviewChange('delete', { _id: id })} />
           ))
         ) : (
           !ownReview && <p className="empty-message">{emptyMessage}</p>

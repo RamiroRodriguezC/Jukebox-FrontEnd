@@ -3,15 +3,14 @@ import './EntityHeader.css';
 import { Link } from 'react-router-dom';
 
 const EntityHeader = ({ 
-  type,          // "Álbum", "Canción" o "Artista"
+  type,     // "Álbum", "Canción", "Artista", "User"
   title, 
-  subtitle,      // Nombre del artista o del álbum
-  subtitleLink,  // Link para el subtitle (opcional)
+  authors,  // Array de { nombre, _id } — opcional
   image, 
-  meta,          // El texto de año, géneros, etc.
+  meta,
   variant,
 }) => {
-  
+
   return (
     <header className={`d-hero ${type}`}>
       <div className={`d-cover-wrapper ${variant}`}>
@@ -21,10 +20,21 @@ const EntityHeader = ({
       <div className="d-info">
         {type && <span className="d-type">{type}</span>}
         <h1 className={`d-title ${type}`}>{title}</h1>
-        <Link to={`/${type}/${subtitleLink}`}>
-          <div className="d-subtitle">{subtitle}</div>
-        </Link>
-        <p className="d-meta">{meta}</p>
+
+        {authors?.length > 0 && (
+          <div className="d-subtitle">
+            {authors.map((author, i) => (
+              <span key={author._id}>
+                <Link to={`/artista/${author._id}`} className="d-author-link">
+                  {author.nombre}
+                </Link>
+                {i < authors.length - 1 && <span className="d-author-sep">, </span>}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {meta && <p className="d-meta">{meta}</p>}
       </div>
     </header>
   );

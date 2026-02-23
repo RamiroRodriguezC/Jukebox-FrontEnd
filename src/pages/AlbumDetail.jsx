@@ -28,7 +28,7 @@ const AlbumDetail = () => {
         <EntityHeader
           type="Álbum"
           title={album.titulo}
-          subtitle={<p className="d-artist">{artistName}</p>}
+          authors={album.autores}
           image={coverImage}
           meta={`${album.anio || 'N/A'} • ${album.generos?.join(', ') || 'Sin género'} • ${album.canciones?.length || 0} canciones`}
           variant="square"
