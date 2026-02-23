@@ -1,5 +1,17 @@
-/* src/index.css */
 
+Copy
+
+/* src/index.css */
+.main-content {
+  /* El padding-top debe ser igual o mayor al alto de tu Navbar */
+  padding-top: 40px; 
+  
+  /* Margen a los costados para que 'Test' no toque los bordes en PC */
+  max-width: 1200px;
+  margin: 0 auto; 
+  padding-left: 20px;
+  padding-right: 20px;
+}
 /* ─── VARIABLES GLOBALES ─────────────────────────────────
    Definidas acá para que estén disponibles en TODA la app,
    sin importar qué página se cargue primero.
@@ -106,4 +118,35 @@ button:focus-visible {
 
 .ant-spin-dot-item {
   background-color: var(--accent-color) !important;
+}
+/* ─── GLOBAL GLOW BACKGROUND ─────────────────────────────
+   Glows ambientales fijos para toda la app.
+   Reemplazan los glow divs del Hero (hero-glow--1 / hero-glow--2).
+──────────────────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  top: -100px;
+  right: -80px;
+  width: 500px;
+  height: 500px;
+  background: rgba(192, 132, 252, 0.12);
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -80px;
+  left: 10%;
+  width: 400px;
+  height: 400px;
+  background: rgba(99, 102, 241, 0.08);
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
 }

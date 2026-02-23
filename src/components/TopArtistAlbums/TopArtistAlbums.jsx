@@ -1,9 +1,10 @@
 import React from 'react';
 import AlbumCard from '../cards/AlbumCard';
+import { Link } from 'react-router-dom';
 import './TopArtistAlbums.css';
 import '../../styles/Ui.css';
 
-const TopAlbumsSection = ({albums}) => {
+const TopAlbumsSection = ({ albums, artistaId }) => {
   if (!albums || albums.length === 0) return null;
 
   return (
@@ -14,7 +15,11 @@ const TopAlbumsSection = ({albums}) => {
           <AlbumCard key={album._id || album.id} album={album} />
         ))}
       </div>
-      <button className="btn-see-more">Ver todos los álbumes</button>
+      {artistaId && (
+        <Link to={`/artista/${artistaId}/albums`}>
+          <button className="btn-see-more">Ver todos los álbumes</button>
+        </Link>
+      )}
     </section>
   );
 };

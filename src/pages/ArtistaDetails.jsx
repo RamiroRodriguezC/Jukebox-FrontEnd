@@ -32,7 +32,7 @@ const ArtistaDetail = () => {
         />
 
         <div className="d-content-grid">
-          <TopAlbumsSection albums={albums} />
+          <TopAlbumsSection albums={albums} artistaId={id} />
 
           <div>
             <AboutArtistSection artista={artista} />

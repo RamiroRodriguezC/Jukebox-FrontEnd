@@ -37,9 +37,6 @@ const Hero = () => {
         </div>
 
       </div>
-
-      <div className="hero-glow hero-glow--1" />
-      <div className="hero-glow hero-glow--2" />
     </section>
   );
 };
