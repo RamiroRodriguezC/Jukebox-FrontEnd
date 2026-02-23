@@ -74,7 +74,7 @@ const FavoritesSection = () => {
   const [searching, setSearching] = useState(false);
 
   const userId = user?._id || user?.id;
-  const MAX = 4;
+  const MAX = 5;
 
   /* ── Cargar lista ── */
   useEffect(() => {
