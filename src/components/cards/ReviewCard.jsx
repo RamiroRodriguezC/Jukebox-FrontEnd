@@ -54,7 +54,7 @@ const ReviewCard = ({ review, onDelete }) => {
           )}
         </div>
       </div>
-      <p className="review-text">"{review.comentario}"</p>
+      <p className="review-text">{review.comentario}</p>
     </div>
   );
 };

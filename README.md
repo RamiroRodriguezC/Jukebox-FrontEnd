@@ -1,298 +1,188 @@
 # 📖 README: Proyecto Jukebox (Frontend)
 
-Este repositorio contiene el Frontend (API REST) del proyecto "Jukebox", desarrollado como parte del examen parcial de Programación III. La API está construida con Node.js, Express y MongoDB, enfocándose en la gestión de música, usuarios y reseñas, con autenticación basada en JWT.
+Este repositorio contiene el frontend del proyecto **Jukebox**, desarrollado como trabajo final de Programación III. Es una SPA (Single Page Application) construida con React + Vite que consume la [API REST de Jukebox](https://jukebox-rpt0.onrender.com), permitiendo a los usuarios explorar música, reseñar álbumes y canciones, y gestionar sus listas de favoritos.
 
-## ¿Que es Jukebox?
+## ¿Qué es Jukebox?
 
-Jukebox es una plataforma social para compartir tu gusto musical, reseñar los albunes y canciones que escuches, descubrir nuevas canciones y llevar el registro de todo el contenido que escuchaste.
+Jukebox es una plataforma social para compartir tu gusto musical. Podés reseñar los álbumes y canciones que escuchés, descubrir nuevos artistas, y llevar el registro de todo el contenido que escuchaste.
+
+---
 
 ## 🚀 Despliegue
 
+La aplicación está desplegada y lista para usarse en:
+
+**URL:** [jukebox-frontend.vercel.app](https://jukebox-front-end.vercel.app/) 
+
+> [!CAUTION] **Mensajes de Commit:** La primera request enviada a la API REST de Jukebox despues de un determinado tiempo de inactividad, demorara alrrededor de 30 segundos en dar respuesta (Es lo que render demora en ponerse en marcha)
+
+---
+
 ## 💻 Tecnologías Utilizadas
 
-- **Node.js:** Entorno de ejecución de backend.
-    
+### Dependencias de producción
+
+| Librería | Versión | Propósito |
+|---|---|---|
+| **React** | ^19.2.0 | Librería principal para construir la interfaz de usuario mediante componentes reutilizables |
+| **React DOM** | ^19.2.0 | Paquete complementario de React que permite montar la aplicación en el DOM del navegador |
+| **React Router DOM** | ^7.13.0 | Gestión del enrutamiento del lado del cliente (SPA). Permite navegar entre páginas sin recargar el navegador |
+| **Axios** | ^1.13.4 | Cliente HTTP para realizar peticiones a la API REST del backend. Permite configurar interceptores globales para adjuntar el token JWT automáticamente |
+| **Ant Design** | ^6.2.2 | Librería de componentes UI. Se utiliza para `message`, `Avatar`, `Drawer`, `Card`, `Tag`, `Grid`, `Dropdown` y `Spin` |
+| **@ant-design/icons** | ^6.1.0 | Paquete de íconos oficial de Ant Design. Provee íconos como `UserOutlined`, `MenuOutlined`, `LogoutOutlined`, entre otros |
+| **Lucide React** | ^0.563.0 | Librería de íconos SVG (Star, Heart, Trash2, etc.) utilizados en las cards de reseñas y otros componentes |
+
+### Dependencias de desarrollo
+
+| Librería | Versión | Propósito |
+|---|---|---|
+| **Vite** | ^7.2.4 | Herramienta de build y servidor de desarrollo. Ofrece arranque instantáneo y hot-reload mediante ES Modules nativos |
+| **@vitejs/plugin-react** | ^5.1.1 | Plugin oficial de Vite para soportar JSX y Fast Refresh en React |
+| **ESLint** | ^9.39.1 | Linter estático para detectar errores y mantener consistencia en el código JavaScript **(preConfigurado por Vite)** | 
+| **eslint-plugin-react-hooks** | ^7.0.1 | Reglas de ESLint específicas para validar el uso correcto de los Hooks de React |
+| **eslint-plugin-react-refresh** | ^0.4.24 | Reglas de ESLint para garantizar compatibilidad con el Fast Refresh de Vite |
+
+---
 
 ## 🛠️ Configuración y Puesta en Marcha
 
-Sigue estos pasos para levantar el servidor localmente y poder interactuar con él.
-
 ### Software Requerido
 
-Asegúrate de tener instalado el siguiente software:
-
-- **Node.js:** v22.2.0 o superior
-    
+- **Node.js:** v18.0.0 o superior
+- **npm:** v9.0.0 o superior (se instala con Node.js)
+- **Git:** Para clonar el repositorio
 
 ### Variables de Entorno
 
-El proyecto requiere un archivo `.env` en el directorio raíz con las siguientes variables:
+El proyecto requiere un archivo `.env` en el directorio raíz (`/frontend`) con la siguiente variable:
 
 ```
-# URL de conexión a el API REST
-DB_URL= enlace
+# URL base de la API REST del backend
+VITE_API_URL=https://jukebox-rpt0.onrender.com
 ```
+
+> Para desarrollo local, reemplazá el valor por el puerto donde corra el backend (Si la app no encuentra la variable, por defecto intentara enviar las request a `http://localhost:4000` ).
 
 ### Pasos de Instalación
 
 1. **Clonar el repositorio:**
-    
+    ```bash
+    git clone https://github.com/RamiroRodriguezC/Jukebox-FrontEnd
     ```
-    git clone <URL_DEL_REPOSITORIO_BACKEND>
-    ```
-    
-2. **Ingresar al directorio:**
-    
-    ```
-    cd <NOMBRE_DEL_DIRECTORIO>
-    ```
-    
-3. **Instalar las dependencias:**
-    
-    ```
+
+2. **Instalar las dependencias:**
+    ```bash
     npm install
     ```
-    
-4. **Crear el archivo `.env`:** Crea el archivo `.env` en la raíz y llénalo con tus propias credenciales (siguiendo el ejemplo de la sección anterior).
-    
+
+3. **Crear el archivo `.env`:** Creá el archivo `.env` en la raíz de `/frontend` con la variable indicada arriba.
 
 ### Modos de Ejecución
 
-- **Desarrollo (con auto-recarga):**  ->| Utiliza el flag `--watch` nativo de Node.js para reiniciarse automáticamente con cada cambio.| <-
-    
-    ```
+- **Desarrollo (con hot-reload):**
+    ```bash
     npm run dev
     ```
-    
-- **Producción:**
-    
-    ```
-    npm start
-    ```
-    
+    La aplicación estará disponible en `http://localhost:5173`
 
-El servidor estará disponible en `http://localhost:5173` (o el puerto definido en `.env`).
+- **Build de producción:**
+    ```bash
+    npm run build
+    ```
+    Genera los archivos optimizados en la carpeta `/dist`
+
+- **Preview del build:**
+    ```bash
+    npm run preview
+    ```
+    Sirve el build de producción localmente para verificarlo antes de desplegar
+
+---
 
 ## 📂 Estructura del Proyecto
 
-El proyecto sigue una arquitectura en capas para separar responsabilidades (Modelos, Controladores, Servicios, Rutas).
-
 ```
-JUKEBOX-FRONTEND/
+frontend/
+├── public/                   # Archivos estáticos públicos (No utilizada)
 ├── src/
+│   ├── api/
+│   │   └── api.js            # Instancia global de Axios con baseURL e interceptor JWT
+│   │
+│   ├── assets/               # Imágenes estáticas (logo, avatares genéricos, mascota Rocky)
+│   │
+│   ├── components/           # Componentes reutilizables en múltiples páginas
+│   │   ├── AboutArtistSection/   # Sección biográfica del artista con imagen de fondo
+│   │   ├── EntityHeader/         # Header genérico (Details de álbum, canción, artista, usuario)
+│   │   ├── NavBar/               # Barra de navegación con menú responsive y desplegable de usuario
+│   │   ├── ReviewSection/        # Sección de reseñas con resumen de rating y formulario
+│   │   ├── ReviewsScroll/        # Lista vertical de reseñas (usada en EntityReviews)
+│   │   ├── Search/               # Componentes de la barra y navegación de búsqueda
+│   │   ├── TopArtistAlbums/      # Grid de álbumes destacados del artista
+│   │   ├── TopFiveSection/       # Grid de top 5 favoritos del perfil de usuario
+│   │   ├── TopTracksSection/     # Sección de canciones destacadas del artista
+│   │   ├── TrackList/            # Tracklist de un álbum con duración y canción activa
+│   │   └── cards/                # Cards individuales: AlbumCard, ArtistCard, ReviewCard,
+│   │                             # TrackCard, OwnReview (review propia con editar/eliminar)
+│   │
 │   ├── config/
-│   │   └── db.js               # Configuración de conexión a MongoDB
-│   ├── controllers/
-│   │   ├── ...Controller.js    # Manejan la lógica de la petición (req, res)
-│   ├── middlewares/
-│   │   └── authMiddleware.js   # Lógica de autenticación (JWT, roles)
-│   ├── models/
-│   │   ├── ...Model.js         # Definición de los Schemas de Mongoose
-│   ├── routes/
-│   │   ├── ...Routes.js        # Definición de los endpoints de la API
-│   ├── services/
-│   │   ├── ...Service.js       # Lógica de negocio y consultas a la BD
-│   │   └── globalService.js    # Funciones genéricas consumidas por otros servicios
-│   └── main.jsx                # App principal 
-├── .env                        # Archivo de variables de entorno (local)
+│   │   └── constants.js      # Constantes globales (API_URL con fallback a localhost)
+│   │
+│   ├── context/
+│   │   └── AuthContext.jsx   # Context de autenticación: estado del usuario, login() y logout()
+│   │
+│   ├── hooks/
+│   │   └── useFetch.js       # Hook genérico para GET requests con estados loading/error/data
+│   │
+│   ├── pages/                # Vistas completas, una por ruta de React Router
+│   │   ├── Home/             # Página principal con Hero, álbumes recientes y artistas
+│   │   │   └── components/   # Subcomponentes exclusivos de Home (Hero, AlbumesRecientes, etc.)
+│   │   ├── Search/           # Página de búsqueda global por categoría
+│   │   ├── Register/         # Formulario de registro de nuevo usuario
+│   │   ├── UserSettings/     # Configuración de cuenta del usuario
+│   │   │   └── sections/     # Secciones de settings: Profile, Account, Favorites, Danger
+│   │   ├── AlbumDetail.jsx   # Detalle de álbum con tracklist y reseñas
+│   │   ├── SongDetail.jsx    # Detalle de canción con tracklist del álbum y reseñas
+│   │   ├── ArtistaDetails.jsx# Detalle del artista con álbumes y biografía
+│   │   ├── ArtistaAlbums.jsx # Discografía completa del artista con estadísticas
+│   │   ├── EntityReviews.jsx # Lista completa de reseñas de una entidad (álbum o canción)
+│   │   ├── Profile.jsx       # Perfil público de usuario con sus listas de favoritos
+│   │   ├── Login.jsx         # Formulario de inicio de sesión
+        ├── Mantenimiento     # Pagina para las rutas o funcines en curso de implementacion
+│   │   └── NotFound.jsx      # Página 404
+│   │
+│   ├── services/             # Funciones de acceso a la API (capa de servicio)
+│   │   ├── AuthService.js    # login: POST /usuarios/login
+│   │   └── DeleteUserService.js # deleteUser: DELETE /usuarios/:id
+│   │
+│   ├── styles/
+│   │   └── Ui.css            # Estilos globales reutilizables: formularios, botones, feedback
+│   │
+│   ├── App.jsx               # Componente raíz: define todas las rutas con React Router
+│   ├── index.css             # Estilos globales base: variables CSS, reset, fondo, layout
+│   └── main.jsx              # Punto de entrada: monta React con AuthProvider
+│
+├── .env                      # Variables de entorno locales (no se sube al repositorio)
 ├── .gitignore
-├── package.json                # Dependencias y scripts
-└── README.md                   # Esta documentación
+├── index.html                # HTML base de la SPA
+├── package.json              # Dependencias y scripts
+└── vite.config.js            # Configuración de Vite
 ```
 
-## 🗃️ Modelo de Datos (MongoDB)
+---
 
-La base de datos `jukebox_db` consta de 5 colecciones. Se utiliza la desnormalización para optimizar consultas comunes.
+## 🔐 Autenticación
 
-### `usuarios`
+La app gestiona la sesión mediante **JWT**:
 
-Almacena usuarios, credenciales (hash bcrypt), rol (`admin`, `user`) y un array de `canciones_favoritas` (límite 4, desnormalizado).
+- Al hacer login, el token y los datos del usuario se guardan en `localStorage`.
+- El interceptor de Axios en `api.js` adjunta automáticamente el token en el header `Authorization: Bearer <token>` de cada petición.
+- El `AuthContext` expone `user`, `login()` y `logout()` a todos los componentes.
+- Al cerrar sesión o al expirar el token (1h), el estado se limpia y el usuario es redirigido.
 
-- `mail` (String, required, unique)
-    
-- `passwordHash` (String, required)
-    
-- `username` (String, required)
-    
-- `rol` (String, enum: `["admin", "user"]`, default: "user")
-    
-- `isDeleted` (Boolean, default: false)
-    
-- `canciones_favoritas` (Array[Object], max: 4)
-    
-    - `_id` (ObjectId, ref: "Cancion")
-        
-    - `titulo` (String)
-        
-    - `autor_nombre` (String)
-        
-    - `album_portada` (String)
-        
+---
 
-### `artistas`
+## 🌐 Conexión con el Backend
 
-Información sobre los artistas musicales.
+Todas las peticiones se realizan a través de la instancia de Axios configurada en `src/api/api.js`. La URL base se lee desde la variable de entorno `VITE_API_URL`.
 
-- `nombre` (String, required)
-    
-- `pais` (String, required)
-    
-- `descripcion` (String, default: "")
-    
-- `url_foto` (String, default: "")
-    
-- `isDeleted` (Boolean, default: false)
-    
-
-### `albums`
-
-Álbumes musicales. Contiene arrays desnormalizados de `autores` (artistas) y `canciones` (tracklist).
-
-- `titulo` (String, required)
-    
-- `anio` (Number, required)
-    
-- `url_portada` (String, default: "")
-    
-- `isDeleted` (Boolean, default: false)
-    
-- `autores` (Array[Object])
-    
-    - `_id` (ObjectId, ref: "Artista")
-        
-    - `nombre` (String)
-        
-- `canciones` (Array[Object])
-    
-    - `_id` (ObjectId, ref: "Cancion")
-        
-    - `titulo` (String)
-        
-
-### `canciones` (Colección 'canciones')
-
-Detalle de canciones. Contiene datos desnormalizados de su `album` y `autores`. Posee un **índice de texto** (`fullTextSearchIndex`) para búsquedas eficientes.
-
-- `titulo` (String, required)
-    
-- `duracion` (Number, required)
-    
-- `generos` (Array[String], default: [])
-    
-- `fecha_salida` (Date, default: null)
-    
-- `isDeleted` (Boolean, default: false)
-    
-- `album` (Object)
-    
-    - `_id` (ObjectId, ref: "Album")
-        
-    - `titulo` (String)
-        
-    - `url_portada` (String)
-        
-- `autores` (Array[Object])
-    
-    - `_id` (ObjectId, ref: "Artista")
-        
-    - `nombre` (String)
-        
-
-### `reviews`
-
-Colección **polimorfa** que permite reseñar `Canciones` o `Albums` (usando `refPath`). Contiene datos desnormalizados del `autor` (usuario) y de la `entidad_info` (la canción/álbum reseñado).
-
-- `rating` (Number, required, min: 0, max: 5)
-    
-- `like` (Boolean, default: false)
-    
-- `comentario` (String)
-    
-- `isDeleted` (Boolean, default: false)
-    
-- `autor` (Object)
-    
-    - `_id` (ObjectId, ref: "Usuario")
-        
-    - `username` (String)
-        
-    - `url_profile_photo` (String)
-        
-- `entidad_tipo` (String, enum: `['Cancion', 'Album']`)
-    
-- `entidad_id` (ObjectId, refPath: 'entidad_tipo')
-    
-- `entidad_info` (Object)
-    
-    - `titulo` (String)
-        
-    - `autor_nombre` (String)
-        
-    - `url_portada` (String)
-        
-
-## 🌐 Documentación de Endpoints (API REST)
-
-### Autenticación y Seguridad
-
-- La API utiliza **JWT (JSON Web Tokens)** para proteger las rutas.
-    
-- Las rutas protegidas requieren un `Bearer Token` en el header `Authorization`.
-    
-- Se manejan 2 roles: `admin` y `user`.
-    
-- Se implementan middlewares de permisos como `isAdmin` (solo admin), `isSelf` (solo el propio usuario) y `isAuthor` (solo el creador de la review).
-    
-
-_(Para ver ejemplos de Request Body y Respuestas, referirse al código fuente)._
-
-### Rutas
-
-A continuación podrás visualizar un resumen de los endpoints de la aplicación.
-
-Podes encontrar la **documentación detallada** en [Jukebox Full Doc](https://documenter.getpostman.com/view/48710464/2sB3WpRMEY).
-
-#### Rutas Públicas
-
-|**Método**|**Ruta**|**Descripción**|
-|---|---|---|
-|**POST**|`/usuarios/create`|Registra un nuevo usuario.|
-|**POST**|`/usuarios/login`|Autentica un usuario y devuelve un JWT.|
-|**GET**|`/usuarios/:id`|Obtiene un usuario público por ID.|
-|**GET**|`/canciones/search`|Busca canciones por texto (Query: `?q=...`).|
-|**GET**|`/canciones/`|Obtiene todas las canciones.|
-|**GET**|`/canciones/:id`|Obtiene una canción por ID.|
-|**GET**|`/canciones/reviews/:id`|Obtiene todas las reviews de una canción.|
-|**GET**|`/artistas/`|Obtiene todos los artistas.|
-|**GET**|`/artistas/:id`|Obtiene un artista por ID.|
-|**GET**|`/albums/`|Obtiene todos los álbumes.|
-|**GET**|`/albums/:id`|Obtiene un álbum por ID.|
-|**GET**|`/reviews/`|Obtiene todas las reviews.|
-|**GET**|`/reviews/:id`|Obtiene una review por ID.|
-
-#### Rutas de Usuario Autenticado
-
-|**Método**|**Ruta**|**Descripción**|
-|---|---|---|
-|**POST**|`/usuarios/:idUser/favorito/:idCancion`|Añade una canción a favoritos (permiso: `isSelf`).|
-|**PUT**|`/usuarios/:id`|Actualiza datos del usuario (permiso: `isSelf`).|
-|**DELETE**|`/usuarios/:idUser/favorito/:idCancion`|Elimina una canción de favoritos (permiso: `isSelf`).|
-|**DELETE**|`/usuarios/:id`|Borrado lógico de un usuario (permiso: `isSelf`).|
-|**POST**|`/reviews/create`|Crea una nueva review (para Canción o Album).|
-|**PUT**|`/reviews/:id`|Actualiza una review (permiso: `isAuthor`).|
-|**DELETE**|`/reviews/:id`|Borrado lógico de una review (permiso: `isAuthor`).|
-
-#### Rutas de Administrador
-
-| **Método** | **Ruta**               | **Descripción**                |
-| ---------- | ---------------------- | ------------------------------ |
-| **GET**    | `/usuarios/`           | Obtiene todos los usuarios.    |
-| **GET**    | `/usuarios/mail/:mail` | Busca un usuario por email.    |
-| **DELETE** | `/canciones/:id`       | Borrado lógico de una canción. |
-| **DELETE** | `/artistas/:id`        | Borrado lógico de un artista.  |
-| **DELETE** | `/albums/:id`          | Borrado lógico de un álbum.    |
-
-
-## Funcionalidades Pendientes
-- [ ] Mejorar la funcion searchSongs para que tambien busque albunes y artistas coincidentes.
-- [ ] Agregar el procesamiento de imagenes.
+Para más detalle sobre los endpoints disponibles, consultá la [documentación del backend](https://github.com/RamiroRodriguezC/Jukebox-BackEnd/blob/main/README.md).

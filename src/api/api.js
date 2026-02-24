@@ -2,8 +2,8 @@ import axios from 'axios';
 import { API_URL } from '../config/constants.js';
 
 const api = axios.create({
-  // Accedemos a la variable de entorno VITE_API_URL, y si no existe, usamos localhost como fallback
-  baseURL: API_URL, 
+  // Accedemos a la variable de entorno VITE_API_URL (localhost:4000 si no existe)
+  baseURL: API_URL , 
   headers: {
     'Content-Type': 'application/json'
   }

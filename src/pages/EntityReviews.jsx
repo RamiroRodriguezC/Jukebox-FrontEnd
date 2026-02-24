@@ -40,6 +40,7 @@ const EntityReviews = () => {
         </div>
         <ReviewsScroll
           reviews={reviews}
+          setReviews={setReviews}
           title={`Explora las opiniones de ${nombre}`}
         />
       </div>

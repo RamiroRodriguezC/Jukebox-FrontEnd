@@ -13,6 +13,7 @@ import Register from './pages/Register/Register.jsx';
 import UserSettings from './pages/UserSettings/UserSettings.jsx';
 import NotFound from './pages/NotFound.jsx';
 import Home from './pages/Home/Home.jsx';
+import Mantenimiento from './pages/Mantenimiento.jsx';
 import './index.css';
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
       <main className="main-content">
         <Routes>
           <Route path="/"                          element={<Home />} />
-          <Route path="/Login"                     element={<Login />} />
+          <Route path="/login"                     element={<Login />} />
           <Route path="/album/:id"                 element={<AlbumDetalle />} />
           <Route path="/cancion/:id"               element={<SongDetail />} />
           <Route path="/artista/:id"               element={<ArtistaDetail />} />
@@ -36,6 +37,10 @@ function App() {
           <Route path="/search"                    element={<SearchPage />} />
           <Route path="/register"                  element={<Register />} />
           <Route path="/profile/settings"          element={<UserSettings />} />
+          {/* Rutas en mantenimiento - modificar cuando estén listas */}
+          <Route path="/albums"                    element={<Mantenimiento />} />
+          <Route path="/canciones"                 element={<Mantenimiento />} />
+          {/* Rutas Desconocidas - Todas se direccionan a esta pagina */}
           <Route path="*"                          element={<NotFound />} />
         </Routes>
 

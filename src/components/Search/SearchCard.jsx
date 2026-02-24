@@ -10,7 +10,7 @@ const SearchResultCard = ({ item, type }) => {
 
   return (
     <Link to={`/${type}/${item._id}`} className="search-result-link">
-      <div className="search-result-card">
+      <div className="search-result-card" data-type={type}>
         <img src={image} alt={title} className="card-image" />
         <div className="card-info">
           <h4 className="card-title">{title}</h4>

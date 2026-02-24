@@ -2,7 +2,7 @@ import React from 'react';
 import ReviewCard from '../cards/ReviewCard';
 import './ReviewsScroll.css';
 
-const ReviewsScroll = ({ reviews, title = "Reseñas destacadas" }) => {
+const ReviewsScroll = ({ reviews,setReviews, title = "Reseñas destacadas" }) => {
   const reviewsList = Array.isArray(reviews) ? reviews : [];
   if (reviewsList.length === 0) return <p>No hay reseñas en el array</p>;
 
