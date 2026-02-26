@@ -16,6 +16,11 @@ const SearchPage = () => {
   const [category, setCategory] = useState('Album'); // Estado para almacenar la categoría seleccionada (Album, Cancion o Artista)
   const [results, setResults] = useState([]); // Estado para almacenar los resultados de la búsqueda obtenidos del servidor
 
+  // useEffect para realizar la búsqueda cada vez que cambie la query o la categoría.
+  //se manda la query cuande actualiza la barra de busqueda, pero se usa el timeout para que no se mande
+  //  una peticion al servidor cada vez que el usuario escribe una letra, sino que espere a que 
+  // deje de escribir por 300ms (debounce) para mandar la peticion. 
+  // Si la query tiene menos de 2 caracteres, no se hace la búsqueda y se limpian los resultados.
   useEffect(() => {
     const timer = setTimeout(async () => {
       if (query.length > 1) {
