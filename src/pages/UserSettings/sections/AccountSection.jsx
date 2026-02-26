@@ -6,10 +6,9 @@ import '../../../styles/Ui.css';
 
 const AccountSection = () => {
   const { user }              = useContext(AuthContext);
-   console.log('user en ProfileSection:', user); // ← agregá esto temporalmente
-  const [pwForm, setPwForm]   = useState({ newPassword: '', confirmPassword: '' });
-  const [saving, setSaving]   = useState(false);
-  const [feedback, setFeedback] = useState(null);
+  const [pwForm, setPwForm]   = useState({ newPassword: '', confirmPassword: '' }); // Estado para manejar el formulario de cambio de contraseña, con campos para la nueva contraseña y su confirmación.
+  const [saving, setSaving]   = useState(false); // Estado que indica si se está guardando el cambio de contraseña, para mostrar un estado de carga en el botón de guardar y evitar múltiples envíos simultáneos.
+  const [feedback, setFeedback] = useState(null); // Estado para mostrar mensajes de feedback al usuario después de intentar cambiar la contraseña. Puede ser un objeto con tipo 'error' o 'ok' y un mensaje, o null si no hay feedback que mostrar.
 
   const handleChange = (e) => {
     setPwForm(prev => ({ ...prev, [e.target.name]: e.target.value }));

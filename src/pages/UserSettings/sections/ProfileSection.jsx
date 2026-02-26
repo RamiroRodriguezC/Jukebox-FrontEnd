@@ -12,6 +12,10 @@ const getInitialForm = (user) => ({
   url_profile_photo: user?.url_profile_photo || '',
 });
 
+/**
+ * Esta funcion renderiza la seccion de perfil del usuario, donde puede editar su informacion personal como username, email, biografia y foto de perfil. Utiliza el contexto de autenticacion para obtener los datos del usuario y una funcion de login para actualizar el contexto despues de guardar los cambios. Hace peticiones a la API para actualizar la informacion del usuario en el backend.
+ * @returns 
+ */
 const ProfileSection = () => {
   const { user, login }     = useContext(AuthContext);
   const [form, setForm]     = useState(() => getInitialForm(user));
@@ -23,6 +27,9 @@ const ProfileSection = () => {
     setForm(getInitialForm(user));
   }, [user]);
 
+  // Manejadores de cambio en los inputs del formulario
+  // Cada vez que el usuario escribe algo en un input, actualizamos el estado del formulario y 
+  // limpiamos cualquier mensaje de feedback previo.
   const handleChange = (e) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
     setFeedback(null);

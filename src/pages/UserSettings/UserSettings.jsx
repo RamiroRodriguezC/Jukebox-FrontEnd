@@ -14,6 +14,11 @@ const SECTIONS = [
   { key: 'danger',  label: 'Zona peligrosa', icon: '⚠️' },
 ];
 
+/**
+ * Pagina de configuracion para el usuario. Permite gestionar el perfil, la cuenta, los favoritos y otras opciones de configuración.
+ * Muestra un menú lateral para navegar entre las diferentes secciones de configuración, y cada sección se renderiza condicionalmente según la opción seleccionada.
+ * @returns 
+ */
 const UserSettings = () => {
   const { user }                    = useContext(AuthContext);
   const navigate                    = useNavigate();

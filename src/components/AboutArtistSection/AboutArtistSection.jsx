@@ -1,3 +1,10 @@
+/*
+  Este componente muestra la sección "Sobre el Artista" en la página de detalles del artista.
+  Recibe un objeto "artista" como prop, que contiene información sobre el artista, como su nombre, 
+  país de origen, descripción y URL de la foto. 
+*/
+
+// IMPORTS
 import React from 'react';
 import './AboutArtistSection.css';
 import '../../styles/Ui.css';
