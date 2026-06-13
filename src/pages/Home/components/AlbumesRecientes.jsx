@@ -9,8 +9,8 @@ const AlbumesRecientes = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/albums?limit=6')
-      .then(res => setAlbums(res.data.docs || []))
+    api.get('/chart?top=6')
+      .then(res => setAlbums(res.data.albums || []))
       .catch(err => console.error('Error cargando álbumes:', err))
       .finally(() => setLoading(false));
   }, []);

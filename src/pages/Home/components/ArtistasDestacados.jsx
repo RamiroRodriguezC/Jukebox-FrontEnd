@@ -9,8 +9,8 @@ const ArtistasDestacados = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/artistas?limit=6')
-      .then(res => setArtistas(res.data.docs || []))
+    api.get('/chart?top=6')
+      .then(res => setArtistas(res.data.artists || []))
       .catch(err => console.error('Error cargando artistas:', err))
       .finally(() => setLoading(false));
   }, []);
