@@ -11,7 +11,7 @@ const ArtistaDetail = () => {
   const { id } = useParams();
 
   const { data: artista, loading, error } = useFetch(`/artistas/${id}`, [id]);
-  const { data: albumsData               } = useFetch(`/albums/artista/${id}?limit=4`, [id]);
+  const { data: albumsData               } = useFetch(`/artistas/${id}/albums?limit=4`, [id]);
 
   const albums     = albumsData?.docs || albumsData || [];
   const coverImage = artista?.url_foto || `https://placehold.co/400x400/222/fff?text=${artista?.nombre || 'Artista'}`;

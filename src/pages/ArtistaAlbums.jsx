@@ -10,7 +10,7 @@ const ArtistaAlbums = () => {
   const { id } = useParams();
 
   const { data: artista, loading: loadingArtista, error } = useFetch(`/artistas/${id}`, [id]);
-  const { data: albumsData, loading: loadingAlbums } = useFetch(`/albums/artista/${id}`, [id]);
+  const { data: albumsData, loading: loadingAlbums } = useFetch(`/artistas/${id}/albums`, [id]);
 
   const albums = useMemo(() => {
     const raw = albumsData?.docs || albumsData || [];
