@@ -103,6 +103,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* AQUI PUEDE INCORPORARSE UNA OPCION DE TEMA CLARO
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -115,7 +116,7 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-
+*/
 .ant-spin-dot-item {
   background-color: var(--accent-color) !important;
 }
