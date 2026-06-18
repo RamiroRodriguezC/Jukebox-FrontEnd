@@ -27,7 +27,7 @@ const TrackCard = ({ cancion }) => {
         title={<span className="card-title">{titulo}</span>} 
         /* Solo si el album tiene autores mostramos el subtitle, que es un span con la clase card-subtitle. 
         autores.map(a => a.nombre) mapea los nombres en un array, y .join(', ') lo convierte en un string separado por comas*/ 
-        description={<span className="card-subtitle">{autores.map(a => a.nombre).join(', ')}</span>} 
+        description={autores?.length ? <span className="card-subtitle">{autores.map(a => a.nombre).join(', ')}</span> : null} 
       />
       
       <div style={{ marginTop: 'auto', paddingTop: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

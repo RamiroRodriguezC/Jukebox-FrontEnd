@@ -20,12 +20,7 @@ const TopFiveSection = ({ title, items, type, isOwner, onEdit }) => {
       <div className="top-five-grid">
         {topItems.length > 0 ? (
           topItems.map((item, index) => {
-            // item._id es el objeto poblado (el álbum o canción completo), pq despues del populate queda:
-            // items: [
-            //   {
-            //     _id: { // <-- este es el álbum o canción completo gracias al populate
-            //       _id: "123", etc etc}}
-            const objetoReal = item._id;
+            const objetoReal = (item._id && typeof item._id === 'object') ? item._id : item;
 
             return (
               <div key={objetoReal._id || index} className="top-five-item">
