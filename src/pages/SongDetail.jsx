@@ -25,6 +25,7 @@ const SongDetail = () => {
 
   const reviews    = reviewsData?.docs || [];
   const albumTracks = album?.canciones || [];
+  const songGeneros = cancion?.generos?.length ? cancion.generos : album?.generos;
   const coverImage  = cancion?.album?.url_portada || `https://placehold.co/400x400/222/fff?text=${cancion?.album?.titulo || 'Canción'}`;
   const artistName  = cancion?.autores?.map(a => a.nombre).join(', ') || 'Artista Desconocido';
   const rating      = cancion?.promedioRating || 0;
@@ -45,7 +46,7 @@ const SongDetail = () => {
           title={cancion.titulo}
           authors={cancion.autores}
           image={coverImage}
-          meta={`${cancion.generos?.join(', ')} • ${formatDuration(cancion.duracion)}`}
+          meta={`${songGeneros?.join(', ')} • ${formatDuration(cancion.duracion)}`}
           variant="square"
         />
 
