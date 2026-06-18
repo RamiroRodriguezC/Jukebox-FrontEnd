@@ -15,12 +15,12 @@ import { Link } from 'react-router-dom';
 
 const AlbumCard = ({ album }) => {
   // Desestructuring de las propiedades del álbum para usarlas más fácilmente.
-  const { titulo, anio, url_portada, autores } = album;
+  const { titulo, anio, url_portada, url_miniatura, autores } = album;
 
   return (
 
     // Envolvemos la tarjeta en un Link para que sea clickeable y redirija a la página de detalles del álbum. La URL se construye usando el ID del álbum.
-    <Link to={`/album/${album._id}`} style={{ textDecoration: 'none' }}> 
+    <Link to={`/album/${album._id}`} style={{ textDecoration: 'none', display: 'block', height: '100%' }}> 
     {/* Usamos el componente Card, de AntDesign */}
     <Card
       hoverable
@@ -28,7 +28,7 @@ const AlbumCard = ({ album }) => {
       cover={
         <img 
           alt={titulo} 
-          src={url_portada || genericAlbum} // buscamos la portada del album, si no existe mostramos la generica
+          src={url_portada || url_miniatura || genericAlbum} // buscamos la portada del album, si no existe mostramos la generica
           className="card-image" 
         />
       }
@@ -42,9 +42,9 @@ const AlbumCard = ({ album }) => {
       />
       <div> 
       <Tag className="card-tag">Album</Tag>
-        <Tag color="blue" style={{ borderRadius: '4px', border: 'none', backgroundColor: '#334155', color: '#94a3b8' }}>
+        {anio ? <Tag color="blue" style={{ borderRadius: '4px', border: 'none', backgroundColor: '#334155', color: '#94a3b8' }}>
           {anio}
-        </Tag>
+        </Tag> : null}
       </div>
     </Card>
     </Link>

@@ -38,6 +38,11 @@
 .top-five-item {
   position: relative;
   transition: transform 0.3s ease;
+  min-width: 0;
+}
+
+.top-five-item .card-base .ant-card-body {
+  padding: 10px;
 }
 
 .top-five-item:hover {
