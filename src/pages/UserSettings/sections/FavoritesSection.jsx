@@ -83,7 +83,7 @@ const EditableList = ({ items, onRemove }) => {
   return (
     <div className="fav-edit-list">
       {items.map((item, i) => (
-        <div key={item._id} className="fav-edit-item">
+        <div key={item.deezer_id || item._id} className="fav-edit-item">
           {/* Posición en la lista (1-based) */}
           <span className="fav-edit-item__rank">{i + 1}</span>
           <img
@@ -94,7 +94,7 @@ const EditableList = ({ items, onRemove }) => {
           />
           <span className="fav-edit-item__title">{item.titulo}</span>
           {/* Al hacer clic en ✕ se llama onRemove con el _id del ítem */}
-          <button className="fav-edit-item__remove" onClick={() => onRemove(item._id)}>
+          <button className="fav-edit-item__remove" onClick={() => onRemove(item.deezer_id)}>
             ✕
           </button>
         </div>
@@ -146,7 +146,7 @@ const FavoritesSection = () => {
   const userId = user?._id || user?.id;
 
   // Máximo de favoritos permitidos por lista
-  const MAX = 5;
+  const MAX = 4;
 
 
   /* ── Efecto: cargar lista al montar o cambiar de tab ──
@@ -219,9 +219,8 @@ const FavoritesSection = () => {
 
     // Armamos el ítem con solo los campos necesarios para guardar en la lista
     const item = {
-      _id:           String(result._id),   // String() para asegurar que sea string y no ObjectId
+      deezer_id:     result._id,
       titulo:        result.titulo,
-      // La miniatura viene de distintos lugares según el tipo
       url_miniatura: tab === 'album' ? result.url_portada : result.album?.url_portada,
     };
 
@@ -246,8 +245,7 @@ const FavoritesSection = () => {
     try {
       // El interceptor de axios (api.js) agrega el token automáticamente — no hace falta pasarlo acá
       await api.delete(`/listas/${listId}/items/${itemId}`);
-      // Quitamos el ítem del estado local filtrando por _id
-      setItems(prev => prev.filter(i => i._id !== itemId));
+      setItems(prev => prev.filter(i => { const id = i.deezer_id ?? i._id; return String(id) !== String(itemId); }));
       message.success('Eliminado de favoritos');
     } catch (err) {
       message.error(err.response?.data?.message || 'Error al eliminar');
@@ -259,7 +257,7 @@ const FavoritesSection = () => {
     Se usa para saber rápidamente si un resultado de búsqueda ya está
     en favoritos (alreadyIn), sin tener que recorrer el array cada vez.
   */
-  const itemIds = new Set(items.map(i => String(i._id)));
+  const itemIds = new Set(items.map(i => String(i.deezer_id ?? i._id)));
 
   return (
     <div className="settings-section">

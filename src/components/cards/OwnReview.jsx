@@ -96,11 +96,12 @@ const ReviewModal = ({ open, onClose, onSubmit, saving, existing }) => {
  * @param {string} userId - ID del usuario actual, necesario para crear la reseña con el autor correcto
  * @param {string} entityId - ID de la entidad (canción, álbum, etc) a la que se le hace la reseña
  * @param {string} entityType - tipo de entidad (por ejemplo "track" o "album") a la que se le hace la reseña
+ * @param {object} entidadInfo - { titulo, autor_nombre, url_portada } de la entidad
  * @param {object|null} ownReview - si el usuario ya tiene una reseña para esta entidad, se pasa como objeto. Si no tiene reseña, es null.
  * @param {function} onReviewChange - función que se llama cuando se crea, edita o elimina una reseña. Recibe dos argumentos: el tipo de cambio ('create', 'edit' o 'delete') y los datos relevantes (la nueva reseña creada, la reseña editada, o la reseña eliminada).
  * OwnReview es un componente que muestra la reseña del usuario actual para una entidad específica (canción, álbum, etc). Si el usuario
-*/
-const OwnReview = ({ userId, entityId, entityType, ownReview, onReviewChange }) => {
+ */
+const OwnReview = ({ userId, entityId, entityType, entidadInfo, ownReview, onReviewChange }) => {
   const [modal, setModal]     = useState(false); //Estado que determina si se muestra la ventana emergente del formulario para crear/editar reseña
   const [editing, setEditing] = useState(null); // Estado que almacena la reseña que se está editando. Si es null, no se está editando ninguna reseña. Si tiene un objeto de reseña, ese es el que se carga en el formulario para editar. (ES EXISTING EN EL MODAL)
   const [saving, setSaving]   = useState(false); // Estado que indica si se está guardando la reseña, para mostrar un estado de carga en el botón de enviar y evitar múltiples envíos simultáneos.
@@ -118,7 +119,8 @@ const OwnReview = ({ userId, entityId, entityType, ownReview, onReviewChange }) 
       // Hacemos la petición a la API para crear una nueva reseña, pasando los datos del formulario y la información necesaria para asociar la reseña con el usuario y la entidad correspondiente.
       const { data } = await api.post('/reviews/create', {
         rating: form.rating, comentario: form.comentario, like: form.like,
-        entidad_tipo: entityType, entidad_id: entityId, autor_id: userId,
+        entidad_tipo: entityType, deezer_id: entityId, autor_id: userId,
+        entidad_info: entidadInfo,
       });
       onReviewChange('create', data); //Le avisas al componente padre que cambio la review, para que el padre pueda actualizar su estado y mostrar la nueva reseña en la lista de reseñas.
       closeModal(); //cerras la ventana emergente

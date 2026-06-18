@@ -9,7 +9,7 @@ import './ReviewSection.css';
 const ReviewSection = ({ 
   rating, totalReviews, reviews: initialReviews, 
   emptyMessage = "Aún no hay reseñas.",
-  entityId, entityName, entityType,
+  entityId, entityName, entityType, entidadInfo,
 }) => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState(initialReviews);
@@ -42,6 +42,7 @@ console.log('ownReview._id:', ownReview?._id);
           userId={userId}
           entityId={entityId}
           entityType={entityType}
+          entidadInfo={entidadInfo}
           ownReview={ownReview}
           onReviewChange={handleReviewChange}
         />

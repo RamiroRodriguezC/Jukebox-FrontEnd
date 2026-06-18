@@ -44,6 +44,7 @@ const AlbumDetail = () => {
               entityId={id}
               entityName={album.titulo}
               entityType="Album"
+              entidadInfo={{ titulo: album.titulo, autor_nombre: artistName, url_portada: coverImage }}
             />
           </div>
           <TrackList canciones={album.canciones || []} />

@@ -59,6 +59,7 @@ const SongDetail = () => {
               entityId={id}
               entityName={cancion.titulo}
               entityType="Cancion"
+              entidadInfo={{ titulo: cancion.titulo, autor_nombre: artistName, url_portada: coverImage }}
             />
           </div>
           <TrackList canciones={albumTracks} currentTrackId={cancion._id} />
